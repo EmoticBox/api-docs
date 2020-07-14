@@ -32,6 +32,8 @@ Emoticon API를 사용하는 고객(사)를 의미합니다.
 
 고객(사) 서비스를 사용하는 사용자를 의미합니다.
 
+유의어: User
+
 ### 서비스
 
 Emoticon API를 사용하는 고객(사)의 서비스를 의미합니다.
@@ -88,7 +90,7 @@ API Secret은 외부에 공개되지 않아야 합니다.
 EmoticBox 제휴사에서 마케팅을 위해 배포하는 이모티콘 또는 이모티콘 패키지를 의미합니다.
 브랜드 이모티콘 (패키지)은 브랜드 이모티콘 (패키지) 사용을 동의한 서비스에만 제공되며, 사용자가 서비스에서 브랜드 이모티콘 (패키지)을 사용하는 경우 고객(사)는 수익을 분배받게 됩니다.
 
-### 사용 가능한 이모티콘 패키지
+### 사용 가능한 이모티콘 (패키지)
 
 사용자가 EmoticBox 회원인 경우 사용 가능한 이모티콘 (패키지)는 다음과 같이 구성됩니다.
 
@@ -251,7 +253,7 @@ Field | Type | Required | Description
 accessToken | string | false | Token Exchange API를 통해 발급받은 엑세스 토큰(`abcd`)
  
 <aside class="notice">
-엑세스 토큰은 `Authorization` 헤더 또는 Body의 `accessToken` 필드 둘 중 하나로 설정되어야 하며, 어느 것도 설정되지 않은 경우 `401 Unauthorized` 응답을 받게 됩니다.
+엑세스 토큰은 <code>Authorization</code> 헤더 또는 Body의 <code>accessToken</code> 필드 둘 중 하나로 설정되어야 하며, 어느 것도 설정되지 않은 경우 <code>401 Unauthorized</code> 응답을 받게 됩니다.
 </aside>
 
 ### HTTP Response
@@ -274,7 +276,9 @@ accessToken | string | false | Token Exchange API를 통해 발급받은 엑세�
 
 Field | Type | Description
 ----- | ---- | -----------
-accessToken | string | 엑세스 토큰
+id | string | 이모티콘 패키지의 ID
+name | string | 이모티콘 패키지의 이름
+thumbnail | string | 이모티콘 썸네일 이미지 ID
 
 ## Get Emoticon Package API
 
@@ -301,7 +305,7 @@ Field | Type | Required | Description
 accessToken | string | false | Token Exchange API를 통해 발급받은 엑세스 토큰(`abcd`)
 
 <aside class="notice">
-엑세스 토큰은 `Authorization` 헤더 또는 Body의 `accessToken` 필드 둘 중 하나로 설정되어야 하며, 어느 것도 설정되지 않은 경우 `401 Unauthorized` 응답을 받게 됩니다.
+엑세스 토큰은 <code>Authorization</code> 헤더 또는 Body의 <code>accessToken</code> 필드 둘 중 하나로 설정되어야 하며, 어느 것도 설정되지 않은 경우 <code>401 Unauthorized</code> 응답을 받게 됩니다.
 </aside>
 
 ### HTTP Response
@@ -311,6 +315,7 @@ accessToken | string | false | Token Exchange API를 통해 발급받은 엑세�
   "id": {String},
   "name": {String},
   "thumbnail": {String},
+  "isAnimated": {Boolean},
   "emoticons": [
     {
       "id": {String},
@@ -327,23 +332,60 @@ accessToken | string | false | Token Exchange API를 통해 발급받은 엑세�
 
 Field | Type | Description
 ----- | ---- | -----------
-accessToken | string | 엑세스 토큰
+id | string | 이모티콘 패키지의 ID
+name | string | 이모티콘 패키지의 이름
+thumbnail | string | 이모티콘 썸네일 이미지 ID
+emoticons | emoticon[] | 이모티콘 정보
+emoticon.id | string | 이모티콘 ID
+emoticon.number | integer | 이모티콘 번호(순서)
 
 # How to Display Emoticons
 
+당사가 제공하는 이모티콘 및 썸네일 이미지는 아래와 같은 URL을 구성하여 불러올 수 있습니다.
+
 ```html
-<img src="https://emoticon.emoticbox.com/{format}/{size}/{emoticonId}">
+<img src="https://emoticon.emoticbox.com/{format}/{size}/{id}">
 ```
 
-<a href="./#get-emoticon-package-api">Get Emoticon Package API</a>를 통해 얻을 수 있는 이모티콘 패키지 정보에는 해당 패키지에 포함된 모든 이모티콘의 ID(UUID 형식)가 포함되어 있습니다.
-하나의 이모티콘 패키지에는 16개, 24개, 32개 또는 40개의 이모티콘이 포함되어 있을 수 있습니다.
-아래와 같은 URL을 구성하여 이모티콘 ID로부터 이모티콘 파일을 불러올 수 있습니다.
-
-`https://emoticon.emoticbox.com/{format}/{size}/{emoticonId}`
+`https://emoticon.emoticbox.com/{format}/{size}/{id}`
 
 이모티콘 패키지 파일에는 확장자가 없으며 각 파일 형식에 따라 적절한 `Content-Type` 헤더를 포함하여 응답합니다.
 
-EmoticBox에서 지원하는 이모티콘 파일의 포맷 및 크기는 다음과 같습니다.
+#### Path Parameters
+
+Field | Description
+------|------------
+format | 이모티콘 및 썸네일 이미지 포맷
+size | 이모티콘 및 썸네일 이미지 크기
+id | 이모티콘 및 썸네일 이미지 ID
+
+## Emoticon Package Thumbnails
+
+<a href="./#list-emoticon-packages-api">List Emoticon Packages API</a>를 통해 얻을 수 있는 이모티콘 패키지 목록 또는 <a href="./#get-emoticon-package-api">Get Emoticon Package API</a>를 통해 얻을 수 있는 이모티콘 패키지 정보에는 해당 패키지의 썸네일 이미지 ID(UUID 형식)가 포함되어 있습니다.
+
+당사가 제공하는 이모티콘 패키지 썸네일 이미지 파일의 포맷 및 크기는 아래와 같습니다.
+
+<table>
+<tr>
+    <th>Format</th>
+    <th>Size</th>
+</tr>
+<tr>
+    <td>webp</td>
+    <td>TBD</td>
+</tr>
+<tr>
+    <td>png</td>
+    <td>TBD</td>
+</tr>
+</table>
+
+## Emoticons
+
+<a href="./#get-emoticon-package-api">Get Emoticon Package API</a>를 통해 얻을 수 있는 이모티콘 패키지 정보에는 해당 패키지에 포함된 모든 이모티콘의 ID(UUID 형식)가 포함되어 있습니다.
+하나의 이모티콘 패키지에는 16개, 24개, 32개 또는 40개의 이모티콘이 포함되어 있을 수 있습니다.
+
+당사가 제공하는 이모티콘 파일의 포맷 및 크기는 아래와 같습니다.
 
 <table>
 <tr>
