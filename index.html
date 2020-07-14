@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title>Emoticon API v0 Documentation</title>
+    <title>API Reference</title>
 
     <style media="screen">
       .highlight table td { padding: 5px; }
@@ -288,7 +288,7 @@
     </script>
   </head>
 
-  <body class="index" data-languages="[&quot;json&quot;,&quot;javascript&quot;]">
+  <body class="index" data-languages="[&quot;shell&quot;,&quot;ruby&quot;,&quot;python&quot;,&quot;javascript&quot;]">
     <a href="#" id="nav-button">
       <span>
         NAV
@@ -296,9 +296,11 @@
       </span>
     </a>
     <div class="toc-wrapper">
-      <img src="images/logo-1ae64587.png" class="logo" alt="" />
+      <img src="images/logo-1e815a84.png" class="logo" alt="" />
         <div class="lang-selector">
-              <a href="#" data-language-name="json">json</a>
+              <a href="#" data-language-name="shell">shell</a>
+              <a href="#" data-language-name="ruby">ruby</a>
+              <a href="#" data-language-name="python">python</a>
               <a href="#" data-language-name="javascript">javascript</a>
         </div>
         <div class="search">
@@ -308,45 +310,30 @@
       <ul id="toc" class="toc-list-h1">
           <li>
             <a href="#introduction" class="toc-h1 toc-link" data-title="Introduction">Introduction</a>
-              <ul class="toc-list-h2">
-                  <li>
-                    <a href="#glossary" class="toc-h2 toc-link" data-title="Glossary">Glossary</a>
-                  </li>
-              </ul>
           </li>
           <li>
             <a href="#authentication" class="toc-h1 toc-link" data-title="Authentication">Authentication</a>
+          </li>
+          <li>
+            <a href="#kittens" class="toc-h1 toc-link" data-title="Kittens">Kittens</a>
               <ul class="toc-list-h2">
                   <li>
-                    <a href="#authentication-api" class="toc-h2 toc-link" data-title="Authentication API">Authentication API</a>
+                    <a href="#get-all-kittens" class="toc-h2 toc-link" data-title="Get All Kittens">Get All Kittens</a>
                   </li>
                   <li>
-                    <a href="#token-exchange-api" class="toc-h2 toc-link" data-title="Token Exchange API">Token Exchange API</a>
+                    <a href="#get-a-specific-kitten" class="toc-h2 toc-link" data-title="Get a Specific Kitten">Get a Specific Kitten</a>
+                  </li>
+                  <li>
+                    <a href="#delete-a-specific-kitten" class="toc-h2 toc-link" data-title="Delete a Specific Kitten">Delete a Specific Kitten</a>
                   </li>
               </ul>
-          </li>
-          <li>
-            <a href="#request-emoticons" class="toc-h1 toc-link" data-title="Request Emoticons">Request Emoticons</a>
-              <ul class="toc-list-h2">
-                  <li>
-                    <a href="#list-emoticon-packages-api" class="toc-h2 toc-link" data-title="List Emoticon Packages API">List Emoticon Packages API</a>
-                  </li>
-                  <li>
-                    <a href="#get-emoticon-package-api" class="toc-h2 toc-link" data-title="Get Emoticon Package API">Get Emoticon Package API</a>
-                  </li>
-              </ul>
-          </li>
-          <li>
-            <a href="#how-to-display-emoticons" class="toc-h1 toc-link" data-title="How to Display Emoticons">How to Display Emoticons</a>
-          </li>
-          <li>
-            <a href="#api-rate-limit" class="toc-h1 toc-link" data-title="API Rate Limit">API Rate Limit</a>
           </li>
           <li>
             <a href="#errors" class="toc-h1 toc-link" data-title="Errors">Errors</a>
           </li>
       </ul>
         <ul class="toc-footer">
+            <li><a href='#'>Sign Up for a Developer Key</a></li>
             <li><a href='https://github.com/slatedocs/slate'>Documentation Powered by Slate</a></li>
         </ul>
     </div>
@@ -354,400 +341,190 @@
       <div class="dark-box"></div>
       <div class="content">
         <h1 id='introduction'>Introduction</h1>
-<p>EmoticBox Emoticon API 문서입니다.</p>
+<p>Welcome to the Kittn API! You can use our API to access Kittn API endpoints, which can get information on various cats, kittens, and breeds in our database.</p>
 
-<aside class="notice">
-API의 전반적인 흐름을 제외한 세부사항은 베타 버전 출시 전까지 수시로 변경될 수 있습니다.
-</aside>
+<p>We have language bindings in Shell, Ruby, Python, and JavaScript! You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.</p>
 
-<p>EmoticBox API에 대한 기술적 개선점 또는 EmoticBox API 문서에 대한 개선점은 <a href="mailto:tech@emoticbox.com">EmoticBox 기술지원(tech@emoticbox.com)</a>으로 보내주시면 면밀히 검토 후 회신드리겠습니다.</p>
-<h2 id='glossary'>Glossary</h2><h3 id='9beef1f9dc'>고객(사)</h3>
-<p>Emoticon API를 사용하는 고객(사)를 의미합니다.</p>
-<h3 id='5c50d9e50b'>사용자</h3>
-<p>고객(사) 서비스를 사용하는 사용자를 의미합니다.</p>
-<h3 id='45c901dcec'>서비스</h3>
-<p>Emoticon API를 사용하는 고객(사)의 서비스를 의미합니다.
-Emoticon API를 사용하기 위해서는 서비스를 등록하고 API 키를 발급받아야 합니다.</p>
-
-<p>유의어: Service</p>
-<h3 id='id'>서비스 ID</h3>
-<p>서비스를 구분하기 위한 UUID 형식의 고유값입니다.
-서비스 ID는 서비스 등록시 자동으로 생성되며 변경할 수 없습니다.
-서비스를 삭제하고 새로 등록하는 경우 새 서비스 ID가 생성되며 서로 다른 서비스로 간주됩니다.</p>
-
-<p>유의어: Service ID</p>
-<h3 id='api-secret'>API Secret</h3>
-<p>고객사 서비스를 인증하기 위한 비밀키입니다.</p>
-
-<aside class="warning">
-API Secret은 외부에 공개되지 않아야 합니다.
-</aside>
-
-<aside class="notice">
-API Secret이 외부에 유출되었거나 유출되었다고 판단되는 경우 즉시 <a href="mailto:tech@emoticbox.com">EmoticBox 기술지원(tech@emoticbox.com)</a>으로 문의해주시기 바랍니다.
-</aside>
-
-<p>유의어: Service Secret, Secret</p>
-<h3 id='api'>API 키</h3>
-<p>서비스가 Emoticon API를 사용할 때 인증을 위해 사용되는 값으로 Service ID와 Secret의 쌍으로 구성됩니다.
-한 서비스에 여러 개의 API 키를 발급받아 고객(사) 정책에 따라 활용할 수 있습니다.
-한 서비스에 발급된 API 키들의 Service ID 값은 동일합니다.
-API 키가 외부에 유출되었거나 기타 사정으로 폐기하고자 하는 때에는 API 키를 폐기할 수 있습니다.</p>
-
-<aside class="warning">
-API Secret은 외부에 공개되지 않아야 합니다.
-</aside>
-
-<p>유의어: API Key</p>
-<h3 id='a33c320215'>이모티콘</h3>
-<p>이모티콘 패키지에 포함되어 있는 각각의 이모티콘을 의미합니다.</p>
-<h3 id='a70149cd05'>이모티콘 패키지</h3>
-<p>여러 이모티콘의 묶음으로 이모티콘의 최소 판매 단위입니다.
-한 이모티콘 패키지에는 16개, 24개, 32개 또는 40개의 이모티콘이 포함되어 있습니다.</p>
-<h3 id='7359e60bae'>브랜드 이모티콘 (패키지)</h3>
-<p>EmoticBox 제휴사에서 마케팅을 위해 배포하는 이모티콘 또는 이모티콘 패키지를 의미합니다.
-브랜드 이모티콘 (패키지)은 브랜드 이모티콘 (패키지) 사용을 동의한 서비스에만 제공되며, 사용자가 서비스에서 브랜드 이모티콘 (패키지)을 사용하는 경우 고객(사)는 수익을 분배받게 됩니다.</p>
-<h3 id='f14ef6a9e9'>사용 가능한 이모티콘 패키지</h3>
-<p>사용자가 EmoticBox 회원인 경우 사용 가능한 이모티콘 (패키지)는 다음과 같이 구성됩니다.</p>
-
-<p>브랜드 이모티콘 (패키지) + 기본 제공 이모티콘 (패키지) + 사용자가 보유한 이모티콘 (패키지)</p>
-
-<p>사용자가 EmoticBox 회원이 아닌 경우 사용 가능한 이모티콘 (패키지)는 다음과 같이 구성됩니다.</p>
-
-<p>브랜드 이모티콘 (패키지) + 기본 제공 이모티콘 (패키지)</p>
-
-<p>단, 브랜드 이모티콘 (패키지)는 브랜드 이모티콘 (패키지) 사용을 동의한 서비스에만 제공됩니다.</p>
-<h3 id='8d1f01d613'>사용자가 보유한 이모티콘 (패키지)</h3>
-<p>사용자가 보유한 이모티콘 (패키지)는 다음과 같이 구성됩니다.</p>
-
-<p>사용자가 구입한 이모티콘 (패키지) + 사용자가 선물받은 이모티콘 (패키지)</p>
+<p>This example API documentation page was created with <a href="https://github.com/slatedocs/slate">Slate</a>. Feel free to edit it and use it as a base for your own API&#39;s documentation.</p>
 <h1 id='authentication'>Authentication</h1>
-<p>아래 시퀀스 다이어그램은 이모티콘 API의 서비스 및 사용자 인증 절차를 보여줍니다.</p>
+<blockquote>
+<p>To authorize, use this code:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
 
-<p><img src="attachments/auth_sequence_diagram-3a8c7491.png" alt="Service & User Authentication">
-&#9651; 서비스 및 사용자 인증 절차(이미지를 새 탭에서 열면 크게 볼 수 있습니다)</p>
-<h2 id='authentication-api'>Authentication API</h2><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">const</span> <span class="nx">fetch</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">node-fetch</span><span class="dl">'</span><span class="p">);</span>
+<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
+</code></pre></div><div class="highlight"><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">kittn</span>
 
-<span class="kd">const</span> <span class="nx">endpoint</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">https://emoticon.api.emoticbox.com/v0</span><span class="dl">'</span><span class="p">;</span>
+<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="p">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
+</code></pre></div><div class="highlight"><pre class="highlight shell tab-shell"><code><span class="c"># With shell, you can just pass the correct header with each request</span>
+curl <span class="s2">"api_endpoint_here"</span>
+  <span class="nt">-H</span> <span class="s2">"Authorization: meowmeowmeow"</span>
+</code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">const</span> <span class="nx">kittn</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">kittn</span><span class="dl">'</span><span class="p">);</span>
 
-<span class="nx">fetch</span><span class="p">(</span><span class="s2">`</span><span class="p">${</span><span class="nx">endpoint</span><span class="p">}</span><span class="s2">/auth`</span><span class="p">,</span> <span class="p">{</span>
-  <span class="na">method</span><span class="p">:</span> <span class="dl">'</span><span class="s1">POST</span><span class="dl">'</span><span class="p">,</span>
-  <span class="na">body</span><span class="p">:</span> <span class="p">{</span>
-    <span class="na">serviceId</span><span class="p">:</span> <span class="dl">'</span><span class="s1">your_service_id</span><span class="dl">'</span><span class="p">,</span>
-    <span class="na">serviceSecret</span><span class="p">:</span> <span class="dl">'</span><span class="s1">your_secret_key</span><span class="dl">'</span><span class="p">,</span>
-    <span class="na">userEmail</span><span class="p">:</span> <span class="dl">'</span><span class="s1">user_email@your_domain.com</span><span class="dl">'</span><span class="p">,</span>
-  <span class="p">},</span>
-<span class="p">})</span>
-  <span class="p">.</span><span class="nx">then</span><span class="p">((</span><span class="nx">res</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
-    <span class="k">return</span> <span class="nx">res</span><span class="p">.</span><span class="nx">json</span><span class="p">();</span>
-  <span class="p">})</span>
-  <span class="p">.</span><span class="nx">then</span><span class="p">((</span><span class="nx">json</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
-    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">json</span><span class="p">.</span><span class="nx">authenticationToken</span><span class="p">);</span>
-  <span class="p">})</span>
-  <span class="p">.</span><span class="k">catch</span><span class="p">((</span><span class="nx">err</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
-    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">err</span><span class="p">);</span>
-  <span class="p">});</span>
+<span class="kd">let</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">kittn</span><span class="p">.</span><span class="nx">authorize</span><span class="p">(</span><span class="dl">'</span><span class="s1">meowmeowmeow</span><span class="dl">'</span><span class="p">);</span>
 </code></pre></div>
+<blockquote>
+<p>Make sure to replace <code>meowmeowmeow</code> with your API key.</p>
+</blockquote>
+
+<p>Kittn uses API keys to allow access to the API. You can register a new Kittn API key at our <a href="http://example.com/developers">developer portal</a>.</p>
+
+<p>Kittn expects for the API key to be included in all API requests to the server in a header that looks like the following:</p>
+
+<p><code>Authorization: meowmeowmeow</code></p>
+
 <aside class="notice">
-Authentication API는 고객사 서버에서 호출하여야 합니다.
+You must replace <code>meowmeowmeow</code> with your personal API key.
 </aside>
-<h3 id='http-request'>HTTP Request</h3><div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"serviceId"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="err">String</span><span class="p">},</span><span class="w">
-  </span><span class="nl">"serviceSecret"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="err">String</span><span class="p">},</span><span class="w">
-  </span><span class="nl">"userEmail"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="err">String</span><span class="p">}</span><span class="w">
-</span><span class="p">}</span><span class="w">
+<h1 id='kittens'>Kittens</h1><h2 id='get-all-kittens'>Get All Kittens</h2><div class="highlight"><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
+
+<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
+<span class="n">api</span><span class="p">.</span><span class="nf">kittens</span><span class="p">.</span><span class="nf">get</span>
+</code></pre></div><div class="highlight"><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">kittn</span>
+
+<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="p">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
+<span class="n">api</span><span class="p">.</span><span class="n">kittens</span><span class="p">.</span><span class="n">get</span><span class="p">()</span>
+</code></pre></div><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="s2">"http://example.com/api/kittens"</span>
+  <span class="nt">-H</span> <span class="s2">"Authorization: meowmeowmeow"</span>
+</code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">const</span> <span class="nx">kittn</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">kittn</span><span class="dl">'</span><span class="p">);</span>
+
+<span class="kd">let</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">kittn</span><span class="p">.</span><span class="nx">authorize</span><span class="p">(</span><span class="dl">'</span><span class="s1">meowmeowmeow</span><span class="dl">'</span><span class="p">);</span>
+<span class="kd">let</span> <span class="nx">kittens</span> <span class="o">=</span> <span class="nx">api</span><span class="p">.</span><span class="nx">kittens</span><span class="p">.</span><span class="kd">get</span><span class="p">();</span>
+</code></pre></div>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Fluffums"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"breed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"calico"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"fluffiness"</span><span class="p">:</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"cuteness"</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Max"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"breed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unknown"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"fluffiness"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"cuteness"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
 </span></code></pre></div>
-<p><code>POST /auth</code></p>
-<h4 id='body-parameters'>Body Parameters</h4>
+<p>This endpoint retrieves all kittens.</p>
+<h3 id='http-request'>HTTP Request</h3>
+<p><code>GET http://example.com/api/kittens</code></p>
+<h3 id='query-parameters'>Query Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
-<th>Type</th>
-<th>Required</th>
+<th>Default</th>
 <th>Description</th>
 </tr>
 </thead><tbody>
 <tr>
-<td>serviceId</td>
-<td>string</td>
-<td>true</td>
-<td>고객사 서비스 ID.</td>
-</tr>
-<tr>
-<td>serviceSecret</td>
-<td>string</td>
-<td>true</td>
-<td>고객사 서비스 API 키.</td>
-</tr>
-<tr>
-<td>userEmail</td>
-<td>string</td>
-<td>true</td>
-<td>Access Token을 요청한 사용자의 이메일.</td>
-</tr>
-</tbody></table>
-<h3 id='http-response'>HTTP Response</h3><div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"authenticationToken"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="err">String</span><span class="p">}</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre></div>
-<table><thead>
-<tr>
-<th>Field</th>
-<th>Type</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>authenticationToken</td>
-<td>string</td>
-<td>인증 토큰</td>
-</tr>
-</tbody></table>
-<h2 id='token-exchange-api'>Token Exchange API</h2><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">const</span> <span class="nx">endpoint</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">https://emoticon.api.emoticbox.com/v0</span><span class="dl">'</span><span class="p">;</span>
-
-<span class="nx">fetch</span><span class="p">(</span><span class="s2">`</span><span class="p">${</span><span class="nx">endpoint</span><span class="p">}</span><span class="s2">/token`</span><span class="p">,</span> <span class="p">{</span>
-  <span class="na">method</span><span class="p">:</span> <span class="dl">'</span><span class="s1">POST</span><span class="dl">'</span><span class="p">,</span>
-  <span class="na">body</span><span class="p">:</span> <span class="p">{</span>
-    <span class="na">authenticationToken</span><span class="p">:</span> <span class="dl">'</span><span class="s1">your_authentication_token</span><span class="dl">'</span><span class="p">,</span>
-  <span class="p">},</span>
-<span class="p">})</span>
-  <span class="p">.</span><span class="nx">then</span><span class="p">((</span><span class="nx">res</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
-    <span class="k">return</span> <span class="nx">res</span><span class="p">.</span><span class="nx">json</span><span class="p">();</span>
-  <span class="p">})</span>
-  <span class="p">.</span><span class="nx">then</span><span class="p">((</span><span class="nx">json</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
-    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">json</span><span class="p">.</span><span class="nx">accessToken</span><span class="p">);</span>
-  <span class="p">})</span>
-  <span class="p">.</span><span class="k">catch</span><span class="p">((</span><span class="nx">err</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
-    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">err</span><span class="p">);</span>
-  <span class="p">});</span>
-</code></pre></div><h3 id='http-request-2'>HTTP Request</h3>
-<p><code>POST /token</code></p>
-<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"authenticationToken"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="err">String</span><span class="p">}</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre></div><h4 id='body-parameters-2'>Body Parameters</h4>
-<table><thead>
-<tr>
-<th>Field</th>
-<th>Type</th>
-<th>Required</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>authenticationToken</td>
-<td>string</td>
-<td>true</td>
-<td>Authentication API를 통해 발급받은 인증 토큰</td>
-</tr>
-</tbody></table>
-<h3 id='http-response-2'>HTTP Response</h3><div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"accessToken"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="err">String</span><span class="p">}</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre></div>
-<table><thead>
-<tr>
-<th>Field</th>
-<th>Type</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>accessToken</td>
-<td>string</td>
-<td>엑세스 토큰</td>
-</tr>
-</tbody></table>
-<h1 id='request-emoticons'>Request Emoticons</h1>
-<p>아래 시퀀스 다이어그램은 이모티콘 패키지에 포함되어 있는 이모티콘을 불러와 전송하는 절차를 보여줍니다.</p>
-
-<p><img src="attachments/sending_sequence_diagram-5fa4ec9e.png" alt="Sending an Emoticon">
-&#9651; 이모티콘 전송 절차(이미지를 새 탭에서 열면 크게 볼 수 있습니다)</p>
-<h2 id='list-emoticon-packages-api'>List Emoticon Packages API</h2><h3 id='http-request-3'>HTTP Request</h3>
-<p><code>GET /emoticon</code></p>
-<h4 id='header-parameters'>Header Parameters</h4>
-<table><thead>
-<tr>
-<th>Field</th>
-<th>Required</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>Authorization</td>
+<td>include_cats</td>
 <td>false</td>
-<td>Token Exchange API를 통해 발급받은 엑세스 토큰(<code>Bearer abcd...</code>)</td>
+<td>If set to true, the result will also include cats.</td>
 </tr>
-</tbody></table>
-<h4 id='body-parameters-3'>Body Parameters</h4>
-<table><thead>
 <tr>
-<th>Field</th>
-<th>Type</th>
-<th>Required</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>accessToken</td>
-<td>string</td>
-<td>false</td>
-<td>Token Exchange API를 통해 발급받은 엑세스 토큰(<code>abcd</code>)</td>
+<td>available</td>
+<td>true</td>
+<td>If set to false, the result will include kittens that have already been adopted.</td>
 </tr>
 </tbody></table>
 
-<aside class="notice">
-엑세스 토큰은 `Authorization` 헤더 또는 Body의 `accessToken` 필드 둘 중 하나로 설정되어야 하며, 어느 것도 설정되지 않은 경우 `401 Unauthorized` 응답을 받게 됩니다.
+<aside class="success">
+Remember — a happy kitten is an authenticated kitten!
 </aside>
-<h3 id='http-response-3'>HTTP Response</h3><div class="highlight"><pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
-    </span><span class="p">{</span><span class="w">
-      </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="err">String</span><span class="p">},</span><span class="w">
-      </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="err">String</span><span class="p">},</span><span class="w">
-      </span><span class="nl">"thumbnail"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="err">String</span><span class="p">}</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="p">{</span><span class="w">
-      </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="err">String</span><span class="p">},</span><span class="w">
-      </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="err">String</span><span class="p">},</span><span class="w">
-      </span><span class="nl">"thumbnail"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="err">String</span><span class="p">}</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="err">...</span><span class="w">
-</span><span class="p">]</span><span class="w">
-</span></code></pre></div>
-<table><thead>
-<tr>
-<th>Field</th>
-<th>Type</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>accessToken</td>
-<td>string</td>
-<td>엑세스 토큰</td>
-</tr>
-</tbody></table>
-<h2 id='get-emoticon-package-api'>Get Emoticon Package API</h2><h3 id='http-request-4'>HTTP Request</h3>
-<p><code>GET /emoticon/:emoticonPackId</code></p>
-<h4 id='path-parameters'>Path Parameters</h4>
-<table><thead>
-<tr>
-<th>Field</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>emoticonPackId</td>
-<td>정보를 요청할 이모티콘 패키지의 ID(UUID 형식)</td>
-</tr>
-</tbody></table>
-<h4 id='header-parameters-2'>Header Parameters</h4>
-<table><thead>
-<tr>
-<th>Field</th>
-<th>Required</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>Authorization</td>
-<td>false</td>
-<td>Token Exchange API를 통해 발급받은 엑세스 토큰(<code>Bearer abcd...</code>)</td>
-</tr>
-</tbody></table>
-<h4 id='body-parameters-4'>Body Parameters</h4>
-<table><thead>
-<tr>
-<th>Field</th>
-<th>Type</th>
-<th>Required</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>accessToken</td>
-<td>string</td>
-<td>false</td>
-<td>Token Exchange API를 통해 발급받은 엑세스 토큰(<code>abcd</code>)</td>
-</tr>
-</tbody></table>
+<h2 id='get-a-specific-kitten'>Get a Specific Kitten</h2><div class="highlight"><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
 
-<aside class="notice">
-엑세스 토큰은 `Authorization` 헤더 또는 Body의 `accessToken` 필드 둘 중 하나로 설정되어야 하며, 어느 것도 설정되지 않은 경우 `401 Unauthorized` 응답을 받게 됩니다.
-</aside>
-<h3 id='http-response-4'>HTTP Response</h3><div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="err">String</span><span class="p">},</span><span class="w">
-  </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="err">String</span><span class="p">},</span><span class="w">
-  </span><span class="nl">"thumbnail"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="err">String</span><span class="p">},</span><span class="w">
-  </span><span class="nl">"emoticons"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-    </span><span class="p">{</span><span class="w">
-      </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="err">String</span><span class="p">},</span><span class="w">
-      </span><span class="nl">"number"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="err">Integer</span><span class="p">}</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="p">{</span><span class="w">
-      </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="err">String</span><span class="p">},</span><span class="w">
-      </span><span class="nl">"number"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="err">Integer</span><span class="p">}</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="err">...</span><span class="w">
-  </span><span class="p">]</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre></div>
-<table><thead>
-<tr>
-<th>Field</th>
-<th>Type</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>accessToken</td>
-<td>string</td>
-<td>엑세스 토큰</td>
-</tr>
-</tbody></table>
-<h1 id='how-to-display-emoticons'>How to Display Emoticons</h1><div class="highlight"><pre class="highlight html tab-html"><code><span class="nt">&lt;img</span> <span class="na">src=</span><span class="s">"https://emoticon.emoticbox.com/{format}/{size}/{emoticonId}"</span><span class="nt">&gt;</span>
+<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
+<span class="n">api</span><span class="p">.</span><span class="nf">kittens</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+</code></pre></div><div class="highlight"><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">kittn</span>
+
+<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="p">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
+<span class="n">api</span><span class="p">.</span><span class="n">kittens</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+</code></pre></div><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="s2">"http://example.com/api/kittens/2"</span>
+  <span class="nt">-H</span> <span class="s2">"Authorization: meowmeowmeow"</span>
+</code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">const</span> <span class="nx">kittn</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">kittn</span><span class="dl">'</span><span class="p">);</span>
+
+<span class="kd">let</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">kittn</span><span class="p">.</span><span class="nx">authorize</span><span class="p">(</span><span class="dl">'</span><span class="s1">meowmeowmeow</span><span class="dl">'</span><span class="p">);</span>
+<span class="kd">let</span> <span class="nx">max</span> <span class="o">=</span> <span class="nx">api</span><span class="p">.</span><span class="nx">kittens</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
 </code></pre></div>
-<p><a href="./#get-emoticon-package-api">Get Emoticon Package API</a>를 통해 얻을 수 있는 이모티콘 패키지 정보에는 해당 패키지에 포함된 모든 이모티콘의 ID(UUID 형식)가 포함되어 있습니다.
-하나의 이모티콘 패키지에는 16개, 24개, 32개 또는 40개의 이모티콘이 포함되어 있을 수 있습니다.
-아래와 같은 URL을 구성하여 이모티콘 ID로부터 이모티콘 파일을 불러올 수 있습니다.</p>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Max"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"breed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unknown"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"fluffiness"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"cuteness"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<p>This endpoint retrieves a specific kitten.</p>
 
-<p><code>https://emoticon.emoticbox.com/{format}/{size}/{emoticonId}</code></p>
-
-<p>이모티콘 패키지 파일에는 확장자가 없으며 각 파일 형식에 따라 적절한 <code>Content-Type</code> 헤더를 포함하여 응답합니다.</p>
-
-<p>EmoticBox에서 지원하는 이모티콘 파일의 포맷 및 크기는 다음과 같습니다.</p>
-
-<table>
+<aside class="warning">Inside HTML code blocks like this one, you can't use Markdown, so use <code>&lt;code&gt;</code> blocks to denote code.</aside>
+<h3 id='http-request-2'>HTTP Request</h3>
+<p><code>GET http://example.com/kittens/&lt;ID&gt;</code></p>
+<h3 id='url-parameters'>URL Parameters</h3>
+<table><thead>
 <tr>
-    <th>Format</th>
-    <th>Size</th>
+<th>Parameter</th>
+<th>Description</th>
 </tr>
+</thead><tbody>
 <tr>
-    <td>webp</td>
-    <td>TBD</td>
+<td>ID</td>
+<td>The ID of the kitten to retrieve</td>
 </tr>
-<tr>
-    <td>png</td>
-    <td>TBD</td>
-</tr>
-<tr>
-    <td>gif</td>
-    <td>TBD</td>
-</tr>
-</table>
+</tbody></table>
+<h2 id='delete-a-specific-kitten'>Delete a Specific Kitten</h2><div class="highlight"><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
 
-<aside class="notice">
-GIF 포맷 이미지는 투명한 색상이 흰색으로 표시됩니다.
-</aside>
+<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
+<span class="n">api</span><span class="p">.</span><span class="nf">kittens</span><span class="p">.</span><span class="nf">delete</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+</code></pre></div><div class="highlight"><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">kittn</span>
 
-<aside class="notice">
-당사는 WEBP 및 PNG의 애니메이션 재생이 불가능한 환경(Internet Explorer 등)에서의 호환성을 위하여 GIF 포맷 이미지를 제공합니다.
-GIF 포맷 이미지는 이미지의 품질이 낮고, 투명 색상이 흰색으로 표시되는 제약사항이 있습니다.
-당사는 다른 포맷의 사용이 불가능한 환경에서만 GIF 포맷을 사용하는 것을 권장합니다.
-</aside>
-<h1 id='api-rate-limit'>API Rate Limit</h1>
-<p>TBD</p>
+<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="p">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
+<span class="n">api</span><span class="p">.</span><span class="n">kittens</span><span class="p">.</span><span class="n">delete</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+</code></pre></div><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="s2">"http://example.com/api/kittens/2"</span>
+  <span class="nt">-X</span> DELETE
+  <span class="nt">-H</span> <span class="s2">"Authorization: meowmeowmeow"</span>
+</code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">const</span> <span class="nx">kittn</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">kittn</span><span class="dl">'</span><span class="p">);</span>
+
+<span class="kd">let</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">kittn</span><span class="p">.</span><span class="nx">authorize</span><span class="p">(</span><span class="dl">'</span><span class="s1">meowmeowmeow</span><span class="dl">'</span><span class="p">);</span>
+<span class="kd">let</span> <span class="nx">max</span> <span class="o">=</span> <span class="nx">api</span><span class="p">.</span><span class="nx">kittens</span><span class="p">.</span><span class="k">delete</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+</code></pre></div>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"deleted"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">":("</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<p>This endpoint deletes a specific kitten.</p>
+<h3 id='http-request-3'>HTTP Request</h3>
+<p><code>DELETE http://example.com/kittens/&lt;ID&gt;</code></p>
+<h3 id='url-parameters-2'>URL Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>ID</td>
+<td>The ID of the kitten to delete</td>
+</tr>
+</tbody></table>
 <h1 id='errors'>Errors</h1>
-<p>아래는 일반적인 오류 상황에서 돌려받는 <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Status">HTTP 상태 코드</a>입니다.</p>
+<aside class="notice">
+This error section is stored in a separate file in <code>includes/_errors.md</code>. Slate allows you to optionally separate out your docs into many files...just save them to the <code>includes</code> folder and add them to the top of your <code>index.md</code>'s frontmatter. Files are included in the order listed.
+</aside>
+
+<p>The Kittn API uses the following error codes:</p>
 
 <table><thead>
 <tr>
@@ -756,39 +533,57 @@ GIF 포맷 이미지는 이미지의 품질이 낮고, 투명 색상이 흰색�
 </tr>
 </thead><tbody>
 <tr>
-<td>400 Bad Request</td>
-<td>요청이 올바르지 않습니다(필요한 파라미터가 없는 경우, 파라미터가 올바르지 않은 경우 등).</td>
+<td>400</td>
+<td>Bad Request -- Your request is invalid.</td>
 </tr>
 <tr>
-<td>401 Unauthorized</td>
-<td>엑세스 토큰이 존재하지 않거나 올바르지 않습니다.</td>
+<td>401</td>
+<td>Unauthorized -- Your API key is wrong.</td>
 </tr>
 <tr>
-<td>403 Forbidden</td>
-<td>접근 권한이 없는 리소스입니다.</td>
+<td>403</td>
+<td>Forbidden -- The kitten requested is hidden for administrators only.</td>
 </tr>
 <tr>
-<td>404 Not Found</td>
-<td>요청한 리소스가 존재하지 않습니다.</td>
+<td>404</td>
+<td>Not Found -- The specified kitten could not be found.</td>
 </tr>
 <tr>
-<td>405 Method Not Allowed</td>
-<td>잘못된 HTTP Method로 요청하였습니다.</td>
+<td>405</td>
+<td>Method Not Allowed -- You tried to access a kitten with an invalid method.</td>
 </tr>
 <tr>
-<td>429 Too Many Request</td>
-<td>API 요청이 너무 많습니다. <a href="./#api-rate-limit">API Rate Limit</a>을 참조하세요.</td>
+<td>406</td>
+<td>Not Acceptable -- You requested a format that isn&#39;t json.</td>
 </tr>
 <tr>
-<td>500 Internal Server Error</td>
-<td>EmoticBox 서버 오류가 발생했습니다. 반복해서 발생하면 <a href="mailto:tech@emoticbox.com">EmoticBox 기술지원(tech@emoticbox.com)</a>으로 문의해주세요.</td>
+<td>410</td>
+<td>Gone -- The kitten requested has been removed from our servers.</td>
+</tr>
+<tr>
+<td>418</td>
+<td>I&#39;m a teapot.</td>
+</tr>
+<tr>
+<td>429</td>
+<td>Too Many Requests -- You&#39;re requesting too many kittens! Slow down!</td>
+</tr>
+<tr>
+<td>500</td>
+<td>Internal Server Error -- We had a problem with our server. Try again later.</td>
+</tr>
+<tr>
+<td>503</td>
+<td>Service Unavailable -- We&#39;re temporarily offline for maintenance. Please try again later.</td>
 </tr>
 </tbody></table>
 
       </div>
       <div class="dark-box">
           <div class="lang-selector">
-                <a href="#" data-language-name="json">json</a>
+                <a href="#" data-language-name="shell">shell</a>
+                <a href="#" data-language-name="ruby">ruby</a>
+                <a href="#" data-language-name="python">python</a>
                 <a href="#" data-language-name="javascript">javascript</a>
           </div>
       </div>
