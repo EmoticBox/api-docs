@@ -251,40 +251,49 @@ accessToken | string | 엑세스 토큰
 Field | Required | Description
 ------|----------|------------
 Authorization | false | Token Exchange API를 통해 발급받은 엑세스 토큰(`Bearer abcd...`)
-
-#### Body Parameters
-
-Field | Type | Required | Description
-------|------|----------|------------
-accessToken | string | false | Token Exchange API를 통해 발급받은 엑세스 토큰(`abcd`)
  
 <aside class="notice">
-엑세스 토큰은 <code>Authorization</code> 헤더 또는 Body의 <code>accessToken</code> 필드 둘 중 하나로 설정되어야 하며, 어느 것도 설정되지 않은 경우 <code>401 Unauthorized</code> 응답을 받게 됩니다.
+엑세스 토큰은 <code>Authorization</code> 헤더로 설정되어야 하며, 어느 것도 설정되지 않은 경우 <code>401 Unauthorized</code> 응답을 받게 됩니다.
 </aside>
 
 ### HTTP Response
 
 ```json
-[
-    {
-      "id": {String},
+{
+    "numEmoticonPacks": {Integer},
+    "emoticonPacks": [{
+      "id": {Integer},
       "name": {String},
-      "thumbnail": {String}
+      "isAnimated": {Boolean},
+      "thumbnail": {
+        "color": {String},
+        "grayscale": {String},
+      }
     },
     {
-      "id": {String},
+      "id": {Integer},
       "name": {String},
-      "thumbnail": {String}
+      "isAnimated": {Boolean},
+      "thumbnail": {
+        "color": {String},
+        "grayscale": {String},
+      }
     },
     ...
-]
+    ]
+}
 ```
 
 Field | Type | Description
 ----- | ---- | -----------
-id | string | 이모티콘 패키지의 ID
-name | string | 이모티콘 패키지의 이름
-thumbnail | string | 이모티콘 썸네일 이미지 ID
+numEmoticonPacks | integer | 이모티콘 패키지의 개수
+emoticonPacks | emoticonPack[] | 이모티콘 패키지 리스트
+emoticonPack.id | string | 이모티콘 패키지의 ID
+emoticonPack.name | string | 이모티콘 패키지의 이름
+emoticonPack.isAnimated | boolean | 이모티콘 패키지의 애니메이션 여부
+thumbnail | thumbnail{} | 탭 이미지 정보
+thumbnail.color | string | 이모티콘 썸네일 색깔 탭 이미지 ID
+thumbnail.grayscale | string | 이모티콘 썸네일 흑백 탭 이미지 ID
 
 ## Get Emoticon Package API
 
@@ -304,14 +313,8 @@ Field | Required | Description
 ------|----------|------------
 Authorization | false | Token Exchange API를 통해 발급받은 엑세스 토큰(`Bearer abcd...`)
 
-#### Body Parameters
-
-Field | Type | Required | Description
-------|------|----------|------------
-accessToken | string | false | Token Exchange API를 통해 발급받은 엑세스 토큰(`abcd`)
-
 <aside class="notice">
-엑세스 토큰은 <code>Authorization</code> 헤더 또는 Body의 <code>accessToken</code> 필드 둘 중 하나로 설정되어야 하며, 어느 것도 설정되지 않은 경우 <code>401 Unauthorized</code> 응답을 받게 됩니다.
+엑세스 토큰은 <code>Authorization</code> 헤더로 설정되어야 하며, 어느 것도 설정되지 않은 경우 <code>401 Unauthorized</code> 응답을 받게 됩니다.
 </aside>
 
 ### HTTP Response
@@ -320,16 +323,20 @@ accessToken | string | false | Token Exchange API를 통해 발급받은 엑세�
 {
   "id": {String},
   "name": {String},
-  "thumbnail": {String},
+  "numEmoticon": {Integer},
   "isAnimated": {Boolean},
+  "thumbnail": {
+    "color": {String},
+    "grayscale": {String},
+  },
   "emoticons": [
     {
       "id": {String},
-      "number": {Integer}
+      "order": {Integer},
     },
     {
       "id": {String},
-      "number": {Integer}
+      "order": {Integer},
     },
     ...
   ]
@@ -340,10 +347,12 @@ Field | Type | Description
 ----- | ---- | -----------
 id | string | 이모티콘 패키지의 ID
 name | string | 이모티콘 패키지의 이름
-thumbnail | string | 이모티콘 썸네일 이미지 ID
+thumbnail | thumbnail{} | 탭 이미지 정보
+thumbnail.color | string | 이모티콘 썸네일 색깔 탭 이미지 ID
+thumbnail.grayscale | string | 이모티콘 썸네일 흑백 탭 이미지 ID
 emoticons | emoticon[] | 이모티콘 정보
 emoticon.id | string | 이모티콘 ID
-emoticon.number | integer | 이모티콘 번호(순서)
+emoticon.order | integer | 이모티콘 번호(순서)
 
 # How to Display Emoticons
 
