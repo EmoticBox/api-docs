@@ -1,5 +1,5 @@
 ---
-title: Emoticon API v0 Documentation
+title: EmoticBox API
 
 language_tabs: # must be one of https://git.io/vQNgJ
   - json
@@ -13,8 +13,9 @@ search: true
 code_clipboard: true
 ---
 
-# Introduction
-EmoticBox Emoticon API 문서입니다.
+# 소개
+
+EmoticBox API 문서입니다.
 
 <aside class="notice">
 API의 전반적인 흐름을 제외한 세부사항은 베타 버전 출시 전까지 수시로 변경될 수 있습니다.
@@ -22,7 +23,7 @@ API의 전반적인 흐름을 제외한 세부사항은 베타 버전 출시 전
 
 EmoticBox API에 대한 기술적 개선점 또는 EmoticBox API 문서에 대한 개선점은 <a href="mailto:tech@emoticbox.com">EmoticBox 기술지원(tech@emoticbox.com)</a>으로 보내주시면 면밀히 검토 후 회신드리겠습니다.
 
-## Glossary
+## 용어
 
 ### 고객(사)
 
@@ -49,29 +50,17 @@ Emoticon API를 사용하기 위해서는 서비스를 등록하고 API 키를 �
 
 유의어: Service ID
 
-### API Secret
+### API 키
 
 고객사 서비스를 인증하기 위한 비밀키입니다.
+한 서비스에 대해 여러 API 키를 발급받을 수 있습니다.
 
 <aside class="warning">
-API Secret은 외부에 공개되지 않아야 합니다.
+API Key는 외부에 공개되지 않아야 합니다.
 </aside>
 
 <aside class="notice">
-API Secret이 외부에 유출되었거나 유출되었다고 판단되는 경우 즉시 <a href="mailto:tech@emoticbox.com">EmoticBox 기술지원(tech@emoticbox.com)</a>으로 문의해주시기 바랍니다.
-</aside>
-
-유의어: Service Secret, Secret
-
-### API 키
-
-서비스가 Emoticon API를 사용할 때 인증을 위해 사용되는 값으로 Service ID와 Secret의 쌍으로 구성됩니다.
-한 서비스에 여러 개의 API 키를 발급받아 고객(사) 정책에 따라 활용할 수 있습니다.
-한 서비스에 발급된 API 키들의 Service ID 값은 동일합니다.
-API 키가 외부에 유출되었거나 기타 사정으로 폐기하고자 하는 때에는 API 키를 폐기할 수 있습니다.
-
-<aside class="warning">
-API Secret은 외부에 공개되지 않아야 합니다.
+API Key가 외부에 유출되었거나 유출되었다고 판단되는 경우 즉시 <a href="mailto:tech@emoticbox.com">EmoticBox 기술지원(tech@emoticbox.com)</a>으로 문의해주시기 바랍니다.
 </aside>
 
 유의어: API Key
@@ -85,54 +74,40 @@ API Secret은 외부에 공개되지 않아야 합니다.
 여러 이모티콘의 묶음으로 이모티콘의 최소 판매 단위입니다.
 한 이모티콘 패키지에는 16개, 24개, 32개 또는 40개의 이모티콘이 포함되어 있습니다.
 
-### 브랜드 이모티콘 (패키지)
+### 브랜드 이모티콘 패키지
 
-EmoticBox 제휴사에서 마케팅을 위해 배포하는 이모티콘 또는 이모티콘 패키지를 의미합니다.
-브랜드 이모티콘 (패키지)은 브랜드 이모티콘 (패키지) 사용을 동의한 서비스에만 제공되며, 사용자가 서비스에서 브랜드 이모티콘 (패키지)을 사용하는 경우 고객(사)는 수익을 분배받게 됩니다.
+* 준비중입니다.
 
-### 사용 가능한 이모티콘 (패키지)
+### 사용 가능한 이모티콘 패키지
 
-사용자가 EmoticBox 회원인 경우 사용 가능한 이모티콘 (패키지)는 다음과 같이 구성됩니다.
+사용자가 EmoticBox 회원인 경우 사용 가능한 이모티콘 패키지는 기본 제공 이모티콘 패키지는 사용자가 EmoticBox에서 구매한 이모티콘 패키지로 구성되며, 사용자가 EmoticBox 회원이 아닌 경우에는 기본 제공 이모티콘 패키지로만 구성됩니다.
 
-브랜드 이모티콘 (패키지) + 기본 제공 이모티콘 (패키지) + 사용자가 보유한 이모티콘 (패키지)
-
-사용자가 EmoticBox 회원이 아닌 경우 사용 가능한 이모티콘 (패키지)는 다음과 같이 구성됩니다.
-
-브랜드 이모티콘 (패키지) + 기본 제공 이모티콘 (패키지)
-
-단, 브랜드 이모티콘 (패키지)는 브랜드 이모티콘 (패키지) 사용을 동의한 서비스에만 제공됩니다.
-
-### 사용자가 보유한 이모티콘 (패키지)
-
-사용자가 보유한 이모티콘 (패키지)는 다음과 같이 구성됩니다.
-
-사용자가 구입한 이모티콘 (패키지) + 사용자가 선물받은 이모티콘 (패키지)
-
-### 썸네일
+### 탭 이미지
 
 이모티콘 패키지의 대표 이미지로 사용자가 사용할 이모티콘 패키지를 선택할 때 표시됩니다.
 
-유의어: 탭 이미지
+# 인증
 
-# Authentication
-
-아래 시퀀스 다이어그램은 이모티콘 API의 서비스 및 사용자 인증 절차를 보여줍니다.
+EmoticBox API를 사용하기 위해서는 서비스 ID와 API 키를 사용하여 엑세스 토큰을 발급받아야 합니다.
+아래 시퀀스 다이어그램은 인증 및 엑세스 토큰 절차를 보여줍니다.
 
 <img src="attachments/auth_sequence_diagram.png" alt="Service & User Authentication">
-&#9651; 서비스 및 사용자 인증 절차(이미지를 새 탭에서 열면 크게 볼 수 있습니다)
+&#9651; 인증 및 엑세스 토큰 발급 절차(이미지를 새 탭에서 열면 크게 볼 수 있습니다)
 
-## Authentication API
+## REST API
+
+### Authorize User
 
 ```javascript
 const fetch = require('node-fetch');
 
-const endpoint = 'https://emoticon.api.emoticbox.com/v0';
+const endpoint = 'https://api.emoticbox.com/api-auth/v0';
 
 fetch(`${endpoint}/auth`, {
   method: 'POST',
   body: {
     serviceId: 'your_service_id',
-    serviceSecret: 'your_secret_key',
+    apiKey: 'your_api_key',
     userEmail: 'user_email@your_domain.com',
   },
 })
@@ -148,50 +123,52 @@ fetch(`${endpoint}/auth`, {
 ```
 
 <aside class="notice">
-Authentication API는 고객사 서버에서 호출하여야 합니다.
+이 API는 고객사 서버에서 호출하여야 합니다.
 </aside>
 
-### HTTP Request
+#### HTTP Request
 
 ```json
 {
-  "serviceId": {String},
-  "serviceSecret": {String},
-  "userEmail": {String}
+  "serviceId": "your_service_id",
+  "apiKey": "your_secret_key",
+  "userEmail": "user_email@your_domain.com"
 }
 ```
 
 `POST /auth`
 
-#### Body Parameters
+##### Body Parameters
 
 Parameter | Type | Required | Description
 --------- | ---- | -------- | -----------
 serviceId | string | true | 고객사 서비스 ID.
-serviceSecret | string | true | 고객사 서비스 API 키.
+apiKey | string | true | 고객사 서비스 API 키.
 userEmail | string | true | Access Token을 요청한 사용자의 이메일.
 
-### HTTP Response
+* `userEmail`은 사용자가 EmoticBox에서 고객사 서비스와 연동시 등록한 이메일과 일치해야 합니다.
+
+#### HTTP Response
 
 ```json
 {
-  "authenticationToken": {String}
+  "authToken": "authentication-token"
 }
 ```
 
 Field | Type | Description
 ----- | ---- | -----------
-authenticationToken | string | 인증 토큰
+authToken | string | 인증 토큰
 
-## Token Exchange API
+### Token Exchange
 
 ```javascript
-const endpoint = 'https://emoticon.api.emoticbox.com/v0';
+const endpoint = 'https://api.emoticbox.com/api-auth/v0';
 
 fetch(`${endpoint}/token`, {
   method: 'POST',
   body: {
-    authenticationToken: 'your_authentication_token',
+    authenticationToken: 'authentication-token',
   },
 })
   .then((res) => {
@@ -205,27 +182,31 @@ fetch(`${endpoint}/token`, {
   });
 ```
 
-### HTTP Request
+<aside class="notice">
+이 API는 클라이언트에서 호출하여야 합니다.
+</aside>
+
+#### HTTP Request
 
 `POST /token`
 
 ```json
 {
-  "authenticationToken": {String}
+  "authToken": "authentication-token"
 }
 ```
 
-#### Body Parameters
+##### Body Parameters
 
 Field | Type | Required | Description
 ------|------|----------|------------
-authenticationToken | string | true | Authentication API를 통해 발급받은 인증 토큰
+authToken | string | true | Authorize User API를 통해 발급받은 인증 토큰
 
-### HTTP Response
+#### HTTP Response
 
 ```json
 {
-  "accessToken": {String}
+  "accessToken": "access-token"
 }
 ```
 
@@ -233,103 +214,162 @@ Field | Type | Description
 ----- | ---- | -----------
 accessToken | string | 엑세스 토큰
 
-# Request Emoticons
+## API Rate Limit
+
+TBD
+
+# 이모티콘 API
 
 아래 시퀀스 다이어그램은 이모티콘 패키지에 포함되어 있는 이모티콘을 불러와 전송하는 절차를 보여줍니다.
 
 <img src="attachments/sending_sequence_diagram.png" alt="Sending an Emoticon">
 &#9651; 이모티콘 전송 절차(이미지를 새 탭에서 열면 크게 볼 수 있습니다)
 
-## List Emoticon Packages API
+## REST API
 
-### HTTP Request
+### List Available Emoticon Packages
+
+인증된 사용자가 사용 가능한 이모티콘 패키지 목록을 불러옵니다.
+사용 가능한 이모티콘 패키지에는 아래 이모티콘 패키지가 포함됩니다.
+
+* 기본 제공되는 이모티콘 패키지
+* 사용자가 EmoticBox에서 구매한 이모티콘 패키지(사용자가 EmoticBox 회원인 경우)
+
+```javascript
+const endpoint = 'https://api.emoticbox.com/emoticon-api/v0';
+const accessToken = 'access-token';
+
+fetch(`${endpoint}/emoticon`, {
+  method: 'GET',
+  headers: {
+    Authorization: `Bearer ${accessToken}`,
+  },
+})
+  .then((res) => {
+    return res.json();
+  })
+  .then((json) => {
+    for (const i; i < json.numEmoticonPacks; i += 1) {
+      console.log(json.emoticonPacks[i]);
+    }
+  })
+  .catch((err) => {
+    console.log(err);
+  });
+```
+
+#### HTTP Request
 
 `GET /emoticon`
 
-#### Header Parameters
+##### Header Parameters
 
 Field | Required | Description
 ------|----------|------------
-Authorization | false | Token Exchange API를 통해 발급받은 엑세스 토큰(`Bearer abcd...`)
+Authorization | true | Token Exchange API를 통해 발급받은 엑세스 토큰(`Bearer access-token`)
 
-#### Body Parameters
-
-Field | Type | Required | Description
-------|------|----------|------------
-accessToken | string | false | Token Exchange API를 통해 발급받은 엑세스 토큰(`abcd`)
- 
-<aside class="notice">
-엑세스 토큰은 <code>Authorization</code> 헤더 또는 Body의 <code>accessToken</code> 필드 둘 중 하나로 설정되어야 하며, 어느 것도 설정되지 않은 경우 <code>401 Unauthorized</code> 응답을 받게 됩니다.
-</aside>
-
-### HTTP Response
+#### HTTP Response
 
 ```json
-[
-    {
-      "id": {String},
+{
+    "numEmoticonPacks": {Integer},
+    "emoticonPacks": [{
+      "id": {Integer},
       "name": {String},
-      "thumbnail": {String}
+      "isAnimated": {Boolean},
+      "tabImage": {
+        "color": {String},
+        "grayscale": {String},
+      }
     },
     {
-      "id": {String},
+      "id": {Integer},
       "name": {String},
-      "thumbnail": {String}
+      "isAnimated": {Boolean},
+      "tabImage": {
+        "color": {String},
+        "grayscale": {String},
+      }
     },
     ...
-]
+    ]
+}
 ```
 
 Field | Type | Description
 ----- | ---- | -----------
-id | string | 이모티콘 패키지의 ID
-name | string | 이모티콘 패키지의 이름
-thumbnail | string | 이모티콘 썸네일 이미지 ID
+numEmoticonPacks | integer | 이모티콘 패키지의 개수
+emoticonPacks | emoticonPack[] | 이모티콘 패키지 리스트
+emoticonPack.id | string | 이모티콘 패키지의 ID
+emoticonPack.name | string | 이모티콘 패키지의 이름
+emoticonPack.isAnimated | boolean | 이모티콘 패키지의 애니메이션 여부
+emoticonPack.tabImage | tabImage{} | 이모티콘 패키지 탭 이미지
+tabImage.color | string | 이모티콘 패키지 컬러 탭 이미지 ID
+tabImage.grayscale | string | 이모티콘 패키지 흑백 탭 이미지 ID
 
-## Get Emoticon Package API
 
-### HTTP Request
+### Get Emoticon Package
+
+```javascript
+const endpoint = 'https://api.emoticbox.com/emoticon-api/v0';
+const accessToken = 'access-token';
+const emoticonId = 123;
+
+fetch(`${endpoint}/emoticon/${emoticonId}`, {
+  method: 'GET',
+  headers: {
+    Authorization: `Bearer ${accessToken}`,
+  },
+})
+  .then((res) => {
+    return res.json();
+  })
+  .then((json) => {
+    for (const i; i < json.numEmoticons; i += 1) {
+      console.log(json.emoticons[i]);
+    }
+  })
+  .catch((err) => {
+    console.log(err);
+  });
+```
+
+#### HTTP Request
 
 `GET /emoticon/:emoticonPackId`
 
-#### Path Parameters
+##### Path Parameters
 
 Field | Description
 ------|------------
 emoticonPackId | 정보를 요청할 이모티콘 패키지의 ID(UUID 형식)
 
-#### Header Parameters
+##### Header Parameters
 
 Field | Required | Description
 ------|----------|------------
-Authorization | false | Token Exchange API를 통해 발급받은 엑세스 토큰(`Bearer abcd...`)
+Authorization | true | Token Exchange API를 통해 발급받은 엑세스 토큰(`Bearer abcd...`)
 
-#### Body Parameters
-
-Field | Type | Required | Description
-------|------|----------|------------
-accessToken | string | false | Token Exchange API를 통해 발급받은 엑세스 토큰(`abcd`)
-
-<aside class="notice">
-엑세스 토큰은 <code>Authorization</code> 헤더 또는 Body의 <code>accessToken</code> 필드 둘 중 하나로 설정되어야 하며, 어느 것도 설정되지 않은 경우 <code>401 Unauthorized</code> 응답을 받게 됩니다.
-</aside>
-
-### HTTP Response
+#### HTTP Response
 
 ```json
 {
   "id": {String},
   "name": {String},
-  "thumbnail": {String},
+  "numEmoticons": {Integer},
   "isAnimated": {Boolean},
+  "tabImage": {
+    "color": {String},
+    "grayscale": {String},
+  },
   "emoticons": [
     {
       "id": {String},
-      "number": {Integer}
+      "order": {Integer},
     },
     {
       "id": {String},
-      "number": {Integer}
+      "order": {Integer},
     },
     ...
   ]
@@ -340,89 +380,84 @@ Field | Type | Description
 ----- | ---- | -----------
 id | string | 이모티콘 패키지의 ID
 name | string | 이모티콘 패키지의 이름
-thumbnail | string | 이모티콘 썸네일 이미지 ID
+numEmoticons | integer | 패키지에 포함된 이모티콘의 개수
+tabImage | tabImage{} | 탭 이미지 정보
+tabImage.color | string | 이모티콘 패키지 컬러 탭 이미지 ID
+tabImage.grayscale | string | 이모티콘 패키지 흑백 탭 이미지 ID
 emoticons | emoticon[] | 이모티콘 정보
 emoticon.id | string | 이모티콘 ID
-emoticon.number | integer | 이모티콘 번호(순서)
+emoticon.order | integer | 이모티콘 번호(순서)
 
-# How to Display Emoticons
+## 이모티콘 이미지 표시 방법
 
-당사가 제공하는 이모티콘 및 썸네일 이미지는 아래와 같은 URL을 구성하여 불러올 수 있습니다.
-
-```html
-<img src="https://emoticon.emoticbox.com/{format}/{size}/{id}">
-```
-
-`https://emoticon.emoticbox.com/{format}/{size}/{id}`
-
-이모티콘 패키지 파일에는 확장자가 없으며 각 파일 형식에 따라 적절한 `Content-Type` 헤더를 포함하여 응답합니다.
-
-#### Path Parameters
-
-Field | Description
-------|------------
-format | 이모티콘 및 썸네일 이미지 포맷
-size | 이모티콘 및 썸네일 이미지 크기
-id | 이모티콘 및 썸네일 이미지 ID
-
-## Emoticon Package Thumbnails
-
-<a href="./#list-emoticon-packages-api">List Emoticon Packages API</a>를 통해 얻을 수 있는 이모티콘 패키지 목록 또는 <a href="./#get-emoticon-package-api">Get Emoticon Package API</a>를 통해 얻을 수 있는 이모티콘 패키지 정보에는 해당 패키지의 썸네일 이미지 ID(UUID 형식)가 포함되어 있습니다.
-
-당사가 제공하는 이모티콘 패키지 썸네일 이미지 파일의 포맷 및 크기는 아래와 같습니다.
-
-<table>
-<tr>
-    <th>Format</th>
-    <th>Size</th>
-</tr>
-<tr>
-    <td>webp</td>
-    <td>TBD</td>
-</tr>
-<tr>
-    <td>png</td>
-    <td>TBD</td>
-</tr>
-</table>
-
-## Emoticons
+<a href="./#list-emoticon-packages-api">List Emoticon Packages API</a>를 통해 얻을 수 있는 이모티콘 패키지 목록 또는 <a href="./#get-emoticon-package-api">Get Emoticon Package API</a>를 통해 얻을 수 있는 이모티콘 패키지 정보에는 해당 패키지의 탭 이미지 ID(UUID 형식)가 포함되어 있습니다.
 
 <a href="./#get-emoticon-package-api">Get Emoticon Package API</a>를 통해 얻을 수 있는 이모티콘 패키지 정보에는 해당 패키지에 포함된 모든 이모티콘의 ID(UUID 형식)가 포함되어 있습니다.
 하나의 이모티콘 패키지에는 16개, 24개, 32개 또는 40개의 이모티콘이 포함되어 있을 수 있습니다.
 
-당사가 제공하는 이모티콘 파일의 포맷 및 크기는 아래와 같습니다.
+이모티콘 패키지 파일에는 확장자가 없으며 각 파일 형식에 따라 적절한 `Content-Type` 헤더를 포함하여 응답합니다.
 
-<table>
-<tr>
-    <th>Format</th>
-    <th>Size</th>
-</tr>
-<tr>
-    <td>webp</td>
-    <td>TBD</td>
-</tr>
-<tr>
-    <td>png</td>
-    <td>TBD</td>
-</tr>
-<tr>
-    <td>gif</td>
-    <td>TBD</td>
-</tr>
-</table>
+### 이모티콘 패키지 탭 이미지
 
-<aside class="notice">
-GIF 포맷 이미지는 투명한 색상이 흰색으로 표시됩니다.
-</aside>
+이모티콘 패키지 탭 이미지는 아래와 같이 URL을 구성하여 불러올 수 있습니다.
 
-<aside class="notice">
-당사는 WEBP 및 PNG의 애니메이션 재생이 불가능한 환경(Internet Explorer 등)에서의 호환성을 위하여 GIF 포맷 이미지를 제공합니다.
-GIF 포맷 이미지는 이미지의 품질이 낮고, 투명 색상이 흰색으로 표시되는 제약사항이 있습니다.
-당사는 다른 포맷의 사용이 불가능한 환경에서만 GIF 포맷을 사용하는 것을 권장합니다.
-</aside>
+`https://emoticon.emoticbox.com/dist/{format}/tab/{id}`
 
-# API Rate Limit
+```html
+<img src="https://emoticon.emoticbox.com/dist/webp/tab/123456789">
+<img src="https://emoticon.emoticbox.com/dist/png/tab/123456789">
+```
+
+* 포맷: `webp`, `png`
+* 크기: 96px &times; 74px 단일 크기로만 제공
+
+### 정지한 이모티콘 이미지
+
+정지한 이모티콘 이미지는 아래와 같이 URL을 구성하여 불러올 수 있습니다.
+애니메이션 여부와 관련없이 모든 이모티콘 패키지에는 정지한 이모티콘 이미지가 존재합니다.
+
+`https://emoticon.emoticbox.com/dist/{format}/size/static/{id}`
+
+```html
+<img src="https://emoticon.emoticbox.com/dist/webp/360/static/123456789">
+<img src="https://emoticon.emoticbox.com/dist/png/240/static/123456789">
+```
+
+* 포맷: `webp`, `png`
+* 크기: `320`(320px &times; 320px), `240`(240px &times; 240px), `160`(160px &times; 160px), `120`(120px &times; 120px), `80`(80px &times; 80px)
+
+### 일정 횟수만 재생되는 움직이는 이모티콘 이미지
+
+일정 횟수만 재생되는 움직이는 이모티콘 이미지는 아래와 같이 URL을 구성하여 불러올 수 있습니다.
+재생 횟수는 크리에이터가 설정한 값을 따릅니다.
+애니메이션이 없는 이모티콘 패키지(`isAnimated`가 `false`인 경우)는 움직이는 이모티콘 이미지가 존재하지 않습니다.
+
+`https://emoticon.emoticbox.com/dist/{format}/size/animated/{id}`
+
+```html
+<img src="https://emoticon.emoticbox.com/dist/webp/240/animated/123456789">
+<img src="https://emoticon.emoticbox.com/dist/png/160/animated/123456789">
+```
+
+* 포맷: `webp`, `png`
+* 크기: `320`(320px &times; 320px), `240`(240px &times; 240px), `160`(160px &times; 160px), `120`(120px &times; 120px), `80`(80px &times; 80px)
+
+### 반복 재생되는 움직이는 이모티콘 이미지
+
+반복 재생되는 이모티콘 이미지는 아래와 같이 URL을 구성하여 불러올 수 있습니다.
+애니메이션이 없는 이모티콘 패키지(`isAnimated`가 `false`인 경우)는 움직이는 이모티콘 이미지가 존재하지 않습니다.
+
+`https://emoticon.emoticbox.com/dist/{format}/size/loop/{id}`
+
+```html
+<img src="https://emoticon.emoticbox.com/dist/webp/160/loop/123456789">
+<img src="https://emoticon.emoticbox.com/dist/png/120/loop/123456789">
+```
+
+* 포맷: `webp`, `png`
+* 크기: `320`(320px &times; 320px), `240`(240px &times; 240px), `160`(160px &times; 160px), `120`(120px &times; 120px), `80`(80px &times; 80px)
+
+## API Rate Limit
 
 TBD
 
