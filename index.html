@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title>Emoticon API v0 Documentation</title>
+    <title>EmoticBox API</title>
 
     <style media="screen">
       .highlight table td { padding: 5px; }
@@ -307,48 +307,37 @@
         <ul class="search-results"></ul>
       <ul id="toc" class="toc-list-h1">
           <li>
-            <a href="#introduction" class="toc-h1 toc-link" data-title="Introduction">Introduction</a>
+            <a href="#fa255f0ccc" class="toc-h1 toc-link" data-title="소개">소개</a>
               <ul class="toc-list-h2">
                   <li>
-                    <a href="#glossary" class="toc-h2 toc-link" data-title="Glossary">Glossary</a>
+                    <a href="#18abbdc18f" class="toc-h2 toc-link" data-title="용어">용어</a>
                   </li>
               </ul>
           </li>
           <li>
-            <a href="#authentication" class="toc-h1 toc-link" data-title="Authentication">Authentication</a>
+            <a href="#ce7156229f" class="toc-h1 toc-link" data-title="인증">인증</a>
               <ul class="toc-list-h2">
                   <li>
-                    <a href="#authentication-api" class="toc-h2 toc-link" data-title="Authentication API">Authentication API</a>
+                    <a href="#rest-api" class="toc-h2 toc-link" data-title="REST API">REST API</a>
                   </li>
                   <li>
-                    <a href="#token-exchange-api" class="toc-h2 toc-link" data-title="Token Exchange API">Token Exchange API</a>
+                    <a href="#api-rate-limit" class="toc-h2 toc-link" data-title="API Rate Limit">API Rate Limit</a>
                   </li>
               </ul>
           </li>
           <li>
-            <a href="#request-emoticons" class="toc-h1 toc-link" data-title="Request Emoticons">Request Emoticons</a>
+            <a href="#api-2" class="toc-h1 toc-link" data-title="이모티콘 API">이모티콘 API</a>
               <ul class="toc-list-h2">
                   <li>
-                    <a href="#list-emoticon-packages-api" class="toc-h2 toc-link" data-title="List Emoticon Packages API">List Emoticon Packages API</a>
+                    <a href="#rest-api-2" class="toc-h2 toc-link" data-title="REST API">REST API</a>
                   </li>
                   <li>
-                    <a href="#get-emoticon-package-api" class="toc-h2 toc-link" data-title="Get Emoticon Package API">Get Emoticon Package API</a>
+                    <a href="#119fc5d325" class="toc-h2 toc-link" data-title="이모티콘 이미지 표시 방법">이모티콘 이미지 표시 방법</a>
+                  </li>
+                  <li>
+                    <a href="#api-rate-limit-2" class="toc-h2 toc-link" data-title="API Rate Limit">API Rate Limit</a>
                   </li>
               </ul>
-          </li>
-          <li>
-            <a href="#how-to-display-emoticons" class="toc-h1 toc-link" data-title="How to Display Emoticons">How to Display Emoticons</a>
-              <ul class="toc-list-h2">
-                  <li>
-                    <a href="#emoticon-package-thumbnails" class="toc-h2 toc-link" data-title="Emoticon Package Thumbnails">Emoticon Package Thumbnails</a>
-                  </li>
-                  <li>
-                    <a href="#emoticons" class="toc-h2 toc-link" data-title="Emoticons">Emoticons</a>
-                  </li>
-              </ul>
-          </li>
-          <li>
-            <a href="#api-rate-limit" class="toc-h1 toc-link" data-title="API Rate Limit">API Rate Limit</a>
           </li>
           <li>
             <a href="#errors" class="toc-h1 toc-link" data-title="Errors">Errors</a>
@@ -361,15 +350,15 @@
     <div class="page-wrapper">
       <div class="dark-box"></div>
       <div class="content">
-        <h1 id='introduction'>Introduction</h1>
-<p>EmoticBox Emoticon API 문서입니다.</p>
+        <h1 id='fa255f0ccc'>소개</h1>
+<p>EmoticBox API 문서입니다.</p>
 
 <aside class="notice">
 API의 전반적인 흐름을 제외한 세부사항은 베타 버전 출시 전까지 수시로 변경될 수 있습니다.
 </aside>
 
 <p>EmoticBox API에 대한 기술적 개선점 또는 EmoticBox API 문서에 대한 개선점은 <a href="mailto:tech@emoticbox.com">EmoticBox 기술지원(tech@emoticbox.com)</a>으로 보내주시면 면밀히 검토 후 회신드리겠습니다.</p>
-<h2 id='glossary'>Glossary</h2><h3 id='9beef1f9dc'>고객(사)</h3>
+<h2 id='18abbdc18f'>용어</h2><h3 id='9beef1f9dc'>고객(사)</h3>
 <p>Emoticon API를 사용하는 고객(사)를 의미합니다.</p>
 <h3 id='5c50d9e50b'>사용자</h3>
 <p>고객(사) 서비스를 사용하는 사용자를 의미합니다.</p>
@@ -386,26 +375,16 @@ Emoticon API를 사용하기 위해서는 서비스를 등록하고 API 키를 �
 서비스를 삭제하고 새로 등록하는 경우 새 서비스 ID가 생성되며 서로 다른 서비스로 간주됩니다.</p>
 
 <p>유의어: Service ID</p>
-<h3 id='api-secret'>API Secret</h3>
-<p>고객사 서비스를 인증하기 위한 비밀키입니다.</p>
+<h3 id='api'>API 키</h3>
+<p>고객사 서비스를 인증하기 위한 비밀키입니다.
+한 서비스에 대해 여러 API 키를 발급받을 수 있습니다.</p>
 
 <aside class="warning">
-API Secret은 외부에 공개되지 않아야 합니다.
+API Key는 외부에 공개되지 않아야 합니다.
 </aside>
 
 <aside class="notice">
-API Secret이 외부에 유출되었거나 유출되었다고 판단되는 경우 즉시 <a href="mailto:tech@emoticbox.com">EmoticBox 기술지원(tech@emoticbox.com)</a>으로 문의해주시기 바랍니다.
-</aside>
-
-<p>유의어: Service Secret, Secret</p>
-<h3 id='api'>API 키</h3>
-<p>서비스가 Emoticon API를 사용할 때 인증을 위해 사용되는 값으로 Service ID와 Secret의 쌍으로 구성됩니다.
-한 서비스에 여러 개의 API 키를 발급받아 고객(사) 정책에 따라 활용할 수 있습니다.
-한 서비스에 발급된 API 키들의 Service ID 값은 동일합니다.
-API 키가 외부에 유출되었거나 기타 사정으로 폐기하고자 하는 때에는 API 키를 폐기할 수 있습니다.</p>
-
-<aside class="warning">
-API Secret은 외부에 공개되지 않아야 합니다.
+API Key가 외부에 유출되었거나 유출되었다고 판단되는 경우 즉시 <a href="mailto:tech@emoticbox.com">EmoticBox 기술지원(tech@emoticbox.com)</a>으로 문의해주시기 바랍니다.
 </aside>
 
 <p>유의어: API Key</p>
@@ -414,41 +393,29 @@ API Secret은 외부에 공개되지 않아야 합니다.
 <h3 id='a70149cd05'>이모티콘 패키지</h3>
 <p>여러 이모티콘의 묶음으로 이모티콘의 최소 판매 단위입니다.
 한 이모티콘 패키지에는 16개, 24개, 32개 또는 40개의 이모티콘이 포함되어 있습니다.</p>
-<h3 id='7359e60bae'>브랜드 이모티콘 (패키지)</h3>
-<p>EmoticBox 제휴사에서 마케팅을 위해 배포하는 이모티콘 또는 이모티콘 패키지를 의미합니다.
-브랜드 이모티콘 (패키지)은 브랜드 이모티콘 (패키지) 사용을 동의한 서비스에만 제공되며, 사용자가 서비스에서 브랜드 이모티콘 (패키지)을 사용하는 경우 고객(사)는 수익을 분배받게 됩니다.</p>
-<h3 id='beaa9aec4a'>사용 가능한 이모티콘 (패키지)</h3>
-<p>사용자가 EmoticBox 회원인 경우 사용 가능한 이모티콘 (패키지)는 다음과 같이 구성됩니다.</p>
-
-<p>브랜드 이모티콘 (패키지) + 기본 제공 이모티콘 (패키지) + 사용자가 보유한 이모티콘 (패키지)</p>
-
-<p>사용자가 EmoticBox 회원이 아닌 경우 사용 가능한 이모티콘 (패키지)는 다음과 같이 구성됩니다.</p>
-
-<p>브랜드 이모티콘 (패키지) + 기본 제공 이모티콘 (패키지)</p>
-
-<p>단, 브랜드 이모티콘 (패키지)는 브랜드 이모티콘 (패키지) 사용을 동의한 서비스에만 제공됩니다.</p>
-<h3 id='8d1f01d613'>사용자가 보유한 이모티콘 (패키지)</h3>
-<p>사용자가 보유한 이모티콘 (패키지)는 다음과 같이 구성됩니다.</p>
-
-<p>사용자가 구입한 이모티콘 (패키지) + 사용자가 선물받은 이모티콘 (패키지)</p>
-<h3 id='42eea04750'>썸네일</h3>
+<h3 id='e8659fa17c'>브랜드 이모티콘 패키지</h3>
+<ul>
+<li>준비중입니다.</li>
+</ul>
+<h3 id='f14ef6a9e9'>사용 가능한 이모티콘 패키지</h3>
+<p>사용자가 EmoticBox 회원인 경우 사용 가능한 이모티콘 패키지는 기본 제공 이모티콘 패키지는 사용자가 EmoticBox에서 구매한 이모티콘 패키지로 구성되며, 사용자가 EmoticBox 회원이 아닌 경우에는 기본 제공 이모티콘 패키지로만 구성됩니다.</p>
+<h3 id='bf6964ced6'>탭 이미지</h3>
 <p>이모티콘 패키지의 대표 이미지로 사용자가 사용할 이모티콘 패키지를 선택할 때 표시됩니다.</p>
-
-<p>유의어: 탭 이미지</p>
-<h1 id='authentication'>Authentication</h1>
-<p>아래 시퀀스 다이어그램은 이모티콘 API의 서비스 및 사용자 인증 절차를 보여줍니다.</p>
+<h1 id='ce7156229f'>인증</h1>
+<p>EmoticBox API를 사용하기 위해서는 서비스 ID와 API 키를 사용하여 엑세스 토큰을 발급받아야 합니다.
+아래 시퀀스 다이어그램은 인증 및 엑세스 토큰 절차를 보여줍니다.</p>
 
 <p><img src="attachments/auth_sequence_diagram-c6afe3a0.png" alt="Service & User Authentication">
-&#9651; 서비스 및 사용자 인증 절차(이미지를 새 탭에서 열면 크게 볼 수 있습니다)</p>
-<h2 id='authentication-api'>Authentication API</h2><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">const</span> <span class="nx">fetch</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">node-fetch</span><span class="dl">'</span><span class="p">);</span>
+&#9651; 인증 및 엑세스 토큰 발급 절차(이미지를 새 탭에서 열면 크게 볼 수 있습니다)</p>
+<h2 id='rest-api'>REST API</h2><h3 id='authorize-user'>Authorize User</h3><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">const</span> <span class="nx">fetch</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">node-fetch</span><span class="dl">'</span><span class="p">);</span>
 
-<span class="kd">const</span> <span class="nx">endpoint</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">https://emoticon.api.emoticbox.com/v0</span><span class="dl">'</span><span class="p">;</span>
+<span class="kd">const</span> <span class="nx">endpoint</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">https://api.emoticbox.com/api-auth/v0</span><span class="dl">'</span><span class="p">;</span>
 
 <span class="nx">fetch</span><span class="p">(</span><span class="s2">`</span><span class="p">${</span><span class="nx">endpoint</span><span class="p">}</span><span class="s2">/auth`</span><span class="p">,</span> <span class="p">{</span>
   <span class="na">method</span><span class="p">:</span> <span class="dl">'</span><span class="s1">POST</span><span class="dl">'</span><span class="p">,</span>
   <span class="na">body</span><span class="p">:</span> <span class="p">{</span>
     <span class="na">serviceId</span><span class="p">:</span> <span class="dl">'</span><span class="s1">your_service_id</span><span class="dl">'</span><span class="p">,</span>
-    <span class="na">serviceSecret</span><span class="p">:</span> <span class="dl">'</span><span class="s1">your_secret_key</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">apiKey</span><span class="p">:</span> <span class="dl">'</span><span class="s1">your_api_key</span><span class="dl">'</span><span class="p">,</span>
     <span class="na">userEmail</span><span class="p">:</span> <span class="dl">'</span><span class="s1">user_email@your_domain.com</span><span class="dl">'</span><span class="p">,</span>
   <span class="p">},</span>
 <span class="p">})</span>
@@ -463,16 +430,16 @@ API Secret은 외부에 공개되지 않아야 합니다.
   <span class="p">});</span>
 </code></pre></div>
 <aside class="notice">
-Authentication API는 고객사 서버에서 호출하여야 합니다.
+이 API는 고객사 서버에서 호출하여야 합니다.
 </aside>
-<h3 id='http-request'>HTTP Request</h3><div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"serviceId"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="err">String</span><span class="p">},</span><span class="w">
-  </span><span class="nl">"serviceSecret"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="err">String</span><span class="p">},</span><span class="w">
-  </span><span class="nl">"userEmail"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="err">String</span><span class="p">}</span><span class="w">
+<h4 id='http-request'>HTTP Request</h4><div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"serviceId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"your_service_id"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"apiKey"</span><span class="p">:</span><span class="w"> </span><span class="s2">"your_secret_key"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"userEmail"</span><span class="p">:</span><span class="w"> </span><span class="s2">"user_email@your_domain.com"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <p><code>POST /auth</code></p>
-<h4 id='body-parameters'>Body Parameters</h4>
+<h5 id='body-parameters'>Body Parameters</h5>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -488,7 +455,7 @@ Authentication API는 고객사 서버에서 호출하여야 합니다.
 <td>고객사 서비스 ID.</td>
 </tr>
 <tr>
-<td>serviceSecret</td>
+<td>apiKey</td>
 <td>string</td>
 <td>true</td>
 <td>고객사 서비스 API 키.</td>
@@ -500,8 +467,12 @@ Authentication API는 고객사 서버에서 호출하여야 합니다.
 <td>Access Token을 요청한 사용자의 이메일.</td>
 </tr>
 </tbody></table>
-<h3 id='http-response'>HTTP Response</h3><div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"authenticationToken"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="err">String</span><span class="p">}</span><span class="w">
+
+<ul>
+<li><code>userEmail</code>은 사용자가 EmoticBox에서 고객사 서비스와 연동시 등록한 이메일과 일치해야 합니다.</li>
+</ul>
+<h4 id='http-response'>HTTP Response</h4><div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"authToken"</span><span class="p">:</span><span class="w"> </span><span class="s2">"authentication-token"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <table><thead>
@@ -512,17 +483,17 @@ Authentication API는 고객사 서버에서 호출하여야 합니다.
 </tr>
 </thead><tbody>
 <tr>
-<td>authenticationToken</td>
+<td>authToken</td>
 <td>string</td>
 <td>인증 토큰</td>
 </tr>
 </tbody></table>
-<h2 id='token-exchange-api'>Token Exchange API</h2><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">const</span> <span class="nx">endpoint</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">https://emoticon.api.emoticbox.com/v0</span><span class="dl">'</span><span class="p">;</span>
+<h3 id='token-exchange'>Token Exchange</h3><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">const</span> <span class="nx">endpoint</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">https://api.emoticbox.com/api-auth/v0</span><span class="dl">'</span><span class="p">;</span>
 
 <span class="nx">fetch</span><span class="p">(</span><span class="s2">`</span><span class="p">${</span><span class="nx">endpoint</span><span class="p">}</span><span class="s2">/token`</span><span class="p">,</span> <span class="p">{</span>
   <span class="na">method</span><span class="p">:</span> <span class="dl">'</span><span class="s1">POST</span><span class="dl">'</span><span class="p">,</span>
   <span class="na">body</span><span class="p">:</span> <span class="p">{</span>
-    <span class="na">authenticationToken</span><span class="p">:</span> <span class="dl">'</span><span class="s1">your_authentication_token</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">authenticationToken</span><span class="p">:</span> <span class="dl">'</span><span class="s1">authentication-token</span><span class="dl">'</span><span class="p">,</span>
   <span class="p">},</span>
 <span class="p">})</span>
   <span class="p">.</span><span class="nx">then</span><span class="p">((</span><span class="nx">res</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
@@ -534,12 +505,16 @@ Authentication API는 고객사 서버에서 호출하여야 합니다.
   <span class="p">.</span><span class="k">catch</span><span class="p">((</span><span class="nx">err</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
     <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">err</span><span class="p">);</span>
   <span class="p">});</span>
-</code></pre></div><h3 id='http-request-2'>HTTP Request</h3>
+</code></pre></div>
+<aside class="notice">
+이 API는 클라이언트에서 호출하여야 합니다.
+</aside>
+<h4 id='http-request-2'>HTTP Request</h4>
 <p><code>POST /token</code></p>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"authenticationToken"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="err">String</span><span class="p">}</span><span class="w">
+  </span><span class="nl">"authToken"</span><span class="p">:</span><span class="w"> </span><span class="s2">"authentication-token"</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div><h4 id='body-parameters-2'>Body Parameters</h4>
+</span></code></pre></div><h5 id='body-parameters-2'>Body Parameters</h5>
 <table><thead>
 <tr>
 <th>Field</th>
@@ -549,14 +524,14 @@ Authentication API는 고객사 서버에서 호출하여야 합니다.
 </tr>
 </thead><tbody>
 <tr>
-<td>authenticationToken</td>
+<td>authToken</td>
 <td>string</td>
 <td>true</td>
-<td>Authentication API를 통해 발급받은 인증 토큰</td>
+<td>Authorize User API를 통해 발급받은 인증 토큰</td>
 </tr>
 </tbody></table>
-<h3 id='http-response-2'>HTTP Response</h3><div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"accessToken"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="err">String</span><span class="p">}</span><span class="w">
+<h4 id='http-response-2'>HTTP Response</h4><div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"accessToken"</span><span class="p">:</span><span class="w"> </span><span class="s2">"access-token"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <table><thead>
@@ -572,14 +547,44 @@ Authentication API는 고객사 서버에서 호출하여야 합니다.
 <td>엑세스 토큰</td>
 </tr>
 </tbody></table>
-<h1 id='request-emoticons'>Request Emoticons</h1>
+<h2 id='api-rate-limit'>API Rate Limit</h2>
+<p>TBD</p>
+<h1 id='api-2'>이모티콘 API</h1>
 <p>아래 시퀀스 다이어그램은 이모티콘 패키지에 포함되어 있는 이모티콘을 불러와 전송하는 절차를 보여줍니다.</p>
 
 <p><img src="attachments/sending_sequence_diagram-94b09e57.png" alt="Sending an Emoticon">
 &#9651; 이모티콘 전송 절차(이미지를 새 탭에서 열면 크게 볼 수 있습니다)</p>
-<h2 id='list-emoticon-packages-api'>List Emoticon Packages API</h2><h3 id='http-request-3'>HTTP Request</h3>
+<h2 id='rest-api-2'>REST API</h2><h3 id='list-available-emoticon-packages'>List Available Emoticon Packages</h3>
+<p>인증된 사용자가 사용 가능한 이모티콘 패키지 목록을 불러옵니다.
+사용 가능한 이모티콘 패키지에는 아래 이모티콘 패키지가 포함됩니다.</p>
+
+<ul>
+<li>기본 제공되는 이모티콘 패키지</li>
+<li>사용자가 EmoticBox에서 구매한 이모티콘 패키지(사용자가 EmoticBox 회원인 경우)</li>
+</ul>
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">const</span> <span class="nx">endpoint</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">https://api.emoticbox.com/emoticon-api/v0</span><span class="dl">'</span><span class="p">;</span>
+<span class="kd">const</span> <span class="nx">accessToken</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">access-token</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="nx">fetch</span><span class="p">(</span><span class="s2">`</span><span class="p">${</span><span class="nx">endpoint</span><span class="p">}</span><span class="s2">/emoticon`</span><span class="p">,</span> <span class="p">{</span>
+  <span class="na">method</span><span class="p">:</span> <span class="dl">'</span><span class="s1">GET</span><span class="dl">'</span><span class="p">,</span>
+  <span class="na">headers</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">Authorization</span><span class="p">:</span> <span class="s2">`Bearer </span><span class="p">${</span><span class="nx">accessToken</span><span class="p">}</span><span class="s2">`</span><span class="p">,</span>
+  <span class="p">},</span>
+<span class="p">})</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">((</span><span class="nx">res</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">res</span><span class="p">.</span><span class="nx">json</span><span class="p">();</span>
+  <span class="p">})</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">((</span><span class="nx">json</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kd">const</span> <span class="nx">i</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">json</span><span class="p">.</span><span class="nx">numEmoticonPacks</span><span class="p">;</span> <span class="nx">i</span> <span class="o">+=</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">json</span><span class="p">.</span><span class="nx">emoticonPacks</span><span class="p">[</span><span class="nx">i</span><span class="p">]);</span>
+    <span class="p">}</span>
+  <span class="p">})</span>
+  <span class="p">.</span><span class="k">catch</span><span class="p">((</span><span class="nx">err</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">err</span><span class="p">);</span>
+  <span class="p">});</span>
+</code></pre></div><h4 id='http-request-3'>HTTP Request</h4>
 <p><code>GET /emoticon</code></p>
-<h4 id='header-parameters'>Header Parameters</h4>
+<h5 id='header-parameters'>Header Parameters</h5>
 <table><thead>
 <tr>
 <th>Field</th>
@@ -589,43 +594,33 @@ Authentication API는 고객사 서버에서 호출하여야 합니다.
 </thead><tbody>
 <tr>
 <td>Authorization</td>
-<td>false</td>
-<td>Token Exchange API를 통해 발급받은 엑세스 토큰(<code>Bearer abcd...</code>)</td>
+<td>true</td>
+<td>Token Exchange API를 통해 발급받은 엑세스 토큰(<code>Bearer access-token</code>)</td>
 </tr>
 </tbody></table>
-<h4 id='body-parameters-3'>Body Parameters</h4>
-<table><thead>
-<tr>
-<th>Field</th>
-<th>Type</th>
-<th>Required</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>accessToken</td>
-<td>string</td>
-<td>false</td>
-<td>Token Exchange API를 통해 발급받은 엑세스 토큰(<code>abcd</code>)</td>
-</tr>
-</tbody></table>
-
-<aside class="notice">
-엑세스 토큰은 <code>Authorization</code> 헤더 또는 Body의 <code>accessToken</code> 필드 둘 중 하나로 설정되어야 하며, 어느 것도 설정되지 않은 경우 <code>401 Unauthorized</code> 응답을 받게 됩니다.
-</aside>
-<h3 id='http-response-3'>HTTP Response</h3><div class="highlight"><pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
-    </span><span class="p">{</span><span class="w">
-      </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="err">String</span><span class="p">},</span><span class="w">
+<h4 id='http-response-3'>HTTP Response</h4><div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"numEmoticonPacks"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="err">Integer</span><span class="p">},</span><span class="w">
+    </span><span class="nl">"emoticonPacks"</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="w">
+      </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="err">Integer</span><span class="p">},</span><span class="w">
       </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="err">String</span><span class="p">},</span><span class="w">
-      </span><span class="nl">"thumbnail"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="err">String</span><span class="p">}</span><span class="w">
+      </span><span class="nl">"isAnimated"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="err">Boolean</span><span class="p">},</span><span class="w">
+      </span><span class="nl">"tabImage"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"color"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="err">String</span><span class="p">},</span><span class="w">
+        </span><span class="nl">"grayscale"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="err">String</span><span class="p">},</span><span class="w">
+      </span><span class="p">}</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="p">{</span><span class="w">
-      </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="err">String</span><span class="p">},</span><span class="w">
+      </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="err">Integer</span><span class="p">},</span><span class="w">
       </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="err">String</span><span class="p">},</span><span class="w">
-      </span><span class="nl">"thumbnail"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="err">String</span><span class="p">}</span><span class="w">
+      </span><span class="nl">"isAnimated"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="err">Boolean</span><span class="p">},</span><span class="w">
+      </span><span class="nl">"tabImage"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"color"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="err">String</span><span class="p">},</span><span class="w">
+        </span><span class="nl">"grayscale"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="err">String</span><span class="p">},</span><span class="w">
+      </span><span class="p">}</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="err">...</span><span class="w">
-</span><span class="p">]</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <table><thead>
 <tr>
@@ -635,24 +630,70 @@ Authentication API는 고객사 서버에서 호출하여야 합니다.
 </tr>
 </thead><tbody>
 <tr>
-<td>id</td>
+<td>numEmoticonPacks</td>
+<td>integer</td>
+<td>이모티콘 패키지의 개수</td>
+</tr>
+<tr>
+<td>emoticonPacks</td>
+<td>emoticonPack[]</td>
+<td>이모티콘 패키지 리스트</td>
+</tr>
+<tr>
+<td>emoticonPack.id</td>
 <td>string</td>
 <td>이모티콘 패키지의 ID</td>
 </tr>
 <tr>
-<td>name</td>
+<td>emoticonPack.name</td>
 <td>string</td>
 <td>이모티콘 패키지의 이름</td>
 </tr>
 <tr>
-<td>thumbnail</td>
+<td>emoticonPack.isAnimated</td>
+<td>boolean</td>
+<td>이모티콘 패키지의 애니메이션 여부</td>
+</tr>
+<tr>
+<td>emoticonPack.tabImage</td>
+<td>tabImage{}</td>
+<td>이모티콘 패키지 탭 이미지</td>
+</tr>
+<tr>
+<td>tabImage.color</td>
 <td>string</td>
-<td>이모티콘 썸네일 이미지 ID</td>
+<td>이모티콘 패키지 컬러 탭 이미지 ID</td>
+</tr>
+<tr>
+<td>tabImage.grayscale</td>
+<td>string</td>
+<td>이모티콘 패키지 흑백 탭 이미지 ID</td>
 </tr>
 </tbody></table>
-<h2 id='get-emoticon-package-api'>Get Emoticon Package API</h2><h3 id='http-request-4'>HTTP Request</h3>
+<h3 id='get-emoticon-package'>Get Emoticon Package</h3><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">const</span> <span class="nx">endpoint</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">https://api.emoticbox.com/emoticon-api/v0</span><span class="dl">'</span><span class="p">;</span>
+<span class="kd">const</span> <span class="nx">accessToken</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">access-token</span><span class="dl">'</span><span class="p">;</span>
+<span class="kd">const</span> <span class="nx">emoticonId</span> <span class="o">=</span> <span class="mi">123</span><span class="p">;</span>
+
+<span class="nx">fetch</span><span class="p">(</span><span class="s2">`</span><span class="p">${</span><span class="nx">endpoint</span><span class="p">}</span><span class="s2">/emoticon/</span><span class="p">${</span><span class="nx">emoticonId</span><span class="p">}</span><span class="s2">`</span><span class="p">,</span> <span class="p">{</span>
+  <span class="na">method</span><span class="p">:</span> <span class="dl">'</span><span class="s1">GET</span><span class="dl">'</span><span class="p">,</span>
+  <span class="na">headers</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">Authorization</span><span class="p">:</span> <span class="s2">`Bearer </span><span class="p">${</span><span class="nx">accessToken</span><span class="p">}</span><span class="s2">`</span><span class="p">,</span>
+  <span class="p">},</span>
+<span class="p">})</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">((</span><span class="nx">res</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">res</span><span class="p">.</span><span class="nx">json</span><span class="p">();</span>
+  <span class="p">})</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">((</span><span class="nx">json</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kd">const</span> <span class="nx">i</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">json</span><span class="p">.</span><span class="nx">numEmoticons</span><span class="p">;</span> <span class="nx">i</span> <span class="o">+=</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">json</span><span class="p">.</span><span class="nx">emoticons</span><span class="p">[</span><span class="nx">i</span><span class="p">]);</span>
+    <span class="p">}</span>
+  <span class="p">})</span>
+  <span class="p">.</span><span class="k">catch</span><span class="p">((</span><span class="nx">err</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">err</span><span class="p">);</span>
+  <span class="p">});</span>
+</code></pre></div><h4 id='http-request-4'>HTTP Request</h4>
 <p><code>GET /emoticon/:emoticonPackId</code></p>
-<h4 id='path-parameters'>Path Parameters</h4>
+<h5 id='path-parameters'>Path Parameters</h5>
 <table><thead>
 <tr>
 <th>Field</th>
@@ -664,7 +705,7 @@ Authentication API는 고객사 서버에서 호출하여야 합니다.
 <td>정보를 요청할 이모티콘 패키지의 ID(UUID 형식)</td>
 </tr>
 </tbody></table>
-<h4 id='header-parameters-2'>Header Parameters</h4>
+<h5 id='header-parameters-2'>Header Parameters</h5>
 <table><thead>
 <tr>
 <th>Field</th>
@@ -674,43 +715,27 @@ Authentication API는 고객사 서버에서 호출하여야 합니다.
 </thead><tbody>
 <tr>
 <td>Authorization</td>
-<td>false</td>
+<td>true</td>
 <td>Token Exchange API를 통해 발급받은 엑세스 토큰(<code>Bearer abcd...</code>)</td>
 </tr>
 </tbody></table>
-<h4 id='body-parameters-4'>Body Parameters</h4>
-<table><thead>
-<tr>
-<th>Field</th>
-<th>Type</th>
-<th>Required</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>accessToken</td>
-<td>string</td>
-<td>false</td>
-<td>Token Exchange API를 통해 발급받은 엑세스 토큰(<code>abcd</code>)</td>
-</tr>
-</tbody></table>
-
-<aside class="notice">
-엑세스 토큰은 <code>Authorization</code> 헤더 또는 Body의 <code>accessToken</code> 필드 둘 중 하나로 설정되어야 하며, 어느 것도 설정되지 않은 경우 <code>401 Unauthorized</code> 응답을 받게 됩니다.
-</aside>
-<h3 id='http-response-4'>HTTP Response</h3><div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+<h4 id='http-response-4'>HTTP Response</h4><div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="err">String</span><span class="p">},</span><span class="w">
   </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="err">String</span><span class="p">},</span><span class="w">
-  </span><span class="nl">"thumbnail"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="err">String</span><span class="p">},</span><span class="w">
+  </span><span class="nl">"numEmoticons"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="err">Integer</span><span class="p">},</span><span class="w">
   </span><span class="nl">"isAnimated"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="err">Boolean</span><span class="p">},</span><span class="w">
+  </span><span class="nl">"tabImage"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"color"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="err">String</span><span class="p">},</span><span class="w">
+    </span><span class="nl">"grayscale"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="err">String</span><span class="p">},</span><span class="w">
+  </span><span class="p">},</span><span class="w">
   </span><span class="nl">"emoticons"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
       </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="err">String</span><span class="p">},</span><span class="w">
-      </span><span class="nl">"number"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="err">Integer</span><span class="p">}</span><span class="w">
+      </span><span class="nl">"order"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="err">Integer</span><span class="p">},</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="p">{</span><span class="w">
       </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="err">String</span><span class="p">},</span><span class="w">
-      </span><span class="nl">"number"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="err">Integer</span><span class="p">}</span><span class="w">
+      </span><span class="nl">"order"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="err">Integer</span><span class="p">},</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="err">...</span><span class="w">
   </span><span class="p">]</span><span class="w">
@@ -734,9 +759,24 @@ Authentication API는 고객사 서버에서 호출하여야 합니다.
 <td>이모티콘 패키지의 이름</td>
 </tr>
 <tr>
-<td>thumbnail</td>
+<td>numEmoticons</td>
+<td>integer</td>
+<td>패키지에 포함된 이모티콘의 개수</td>
+</tr>
+<tr>
+<td>tabImage</td>
+<td>tabImage{}</td>
+<td>탭 이미지 정보</td>
+</tr>
+<tr>
+<td>tabImage.color</td>
 <td>string</td>
-<td>이모티콘 썸네일 이미지 ID</td>
+<td>이모티콘 패키지 컬러 탭 이미지 ID</td>
+</tr>
+<tr>
+<td>tabImage.grayscale</td>
+<td>string</td>
+<td>이모티콘 패키지 흑백 탭 이미지 ID</td>
 </tr>
 <tr>
 <td>emoticons</td>
@@ -749,92 +789,67 @@ Authentication API는 고객사 서버에서 호출하여야 합니다.
 <td>이모티콘 ID</td>
 </tr>
 <tr>
-<td>emoticon.number</td>
+<td>emoticon.order</td>
 <td>integer</td>
 <td>이모티콘 번호(순서)</td>
 </tr>
 </tbody></table>
-<h1 id='how-to-display-emoticons'>How to Display Emoticons</h1>
-<p>당사가 제공하는 이모티콘 및 썸네일 이미지는 아래와 같은 URL을 구성하여 불러올 수 있습니다.</p>
-<div class="highlight"><pre class="highlight html tab-html"><code><span class="nt">&lt;img</span> <span class="na">src=</span><span class="s">"https://emoticon.emoticbox.com/{format}/{size}/{id}"</span><span class="nt">&gt;</span>
-</code></pre></div>
-<p><code>https://emoticon.emoticbox.com/{format}/{size}/{id}</code></p>
+<h2 id='119fc5d325'>이모티콘 이미지 표시 방법</h2>
+<p><a href="./#list-emoticon-packages-api">List Emoticon Packages API</a>를 통해 얻을 수 있는 이모티콘 패키지 목록 또는 <a href="./#get-emoticon-package-api">Get Emoticon Package API</a>를 통해 얻을 수 있는 이모티콘 패키지 정보에는 해당 패키지의 탭 이미지 ID(UUID 형식)가 포함되어 있습니다.</p>
 
-<p>이모티콘 패키지 파일에는 확장자가 없으며 각 파일 형식에 따라 적절한 <code>Content-Type</code> 헤더를 포함하여 응답합니다.</p>
-<h4 id='path-parameters-2'>Path Parameters</h4>
-<table><thead>
-<tr>
-<th>Field</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>format</td>
-<td>이모티콘 및 썸네일 이미지 포맷</td>
-</tr>
-<tr>
-<td>size</td>
-<td>이모티콘 및 썸네일 이미지 크기</td>
-</tr>
-<tr>
-<td>id</td>
-<td>이모티콘 및 썸네일 이미지 ID</td>
-</tr>
-</tbody></table>
-<h2 id='emoticon-package-thumbnails'>Emoticon Package Thumbnails</h2>
-<p><a href="./#list-emoticon-packages-api">List Emoticon Packages API</a>를 통해 얻을 수 있는 이모티콘 패키지 목록 또는 <a href="./#get-emoticon-package-api">Get Emoticon Package API</a>를 통해 얻을 수 있는 이모티콘 패키지 정보에는 해당 패키지의 썸네일 이미지 ID(UUID 형식)가 포함되어 있습니다.</p>
-
-<p>당사가 제공하는 이모티콘 패키지 썸네일 이미지 파일의 포맷 및 크기는 아래와 같습니다.</p>
-
-<table>
-<tr>
-    <th>Format</th>
-    <th>Size</th>
-</tr>
-<tr>
-    <td>webp</td>
-    <td>TBD</td>
-</tr>
-<tr>
-    <td>png</td>
-    <td>TBD</td>
-</tr>
-</table>
-<h2 id='emoticons'>Emoticons</h2>
 <p><a href="./#get-emoticon-package-api">Get Emoticon Package API</a>를 통해 얻을 수 있는 이모티콘 패키지 정보에는 해당 패키지에 포함된 모든 이모티콘의 ID(UUID 형식)가 포함되어 있습니다.
 하나의 이모티콘 패키지에는 16개, 24개, 32개 또는 40개의 이모티콘이 포함되어 있을 수 있습니다.</p>
 
-<p>당사가 제공하는 이모티콘 파일의 포맷 및 크기는 아래와 같습니다.</p>
+<p>이모티콘 패키지 파일에는 확장자가 없으며 각 파일 형식에 따라 적절한 <code>Content-Type</code> 헤더를 포함하여 응답합니다.</p>
+<h3 id='2a6175ac20'>이모티콘 패키지 탭 이미지</h3>
+<p>이모티콘 패키지 탭 이미지는 아래와 같이 URL을 구성하여 불러올 수 있습니다.</p>
 
-<table>
-<tr>
-    <th>Format</th>
-    <th>Size</th>
-</tr>
-<tr>
-    <td>webp</td>
-    <td>TBD</td>
-</tr>
-<tr>
-    <td>png</td>
-    <td>TBD</td>
-</tr>
-<tr>
-    <td>gif</td>
-    <td>TBD</td>
-</tr>
-</table>
+<p><code>https://emoticon.emoticbox.com/dist/{format}/tab/{id}</code></p>
+<div class="highlight"><pre class="highlight html tab-html"><code><span class="nt">&lt;img</span> <span class="na">src=</span><span class="s">"https://emoticon.emoticbox.com/dist/webp/tab/123456789"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;img</span> <span class="na">src=</span><span class="s">"https://emoticon.emoticbox.com/dist/png/tab/123456789"</span><span class="nt">&gt;</span>
+</code></pre></div>
+<ul>
+<li>포맷: <code>webp</code>, <code>png</code></li>
+<li>크기: 96px &times; 74px 단일 크기로만 제공</li>
+</ul>
+<h3 id='90b41392c7'>정지한 이모티콘 이미지</h3>
+<p>정지한 이모티콘 이미지는 아래와 같이 URL을 구성하여 불러올 수 있습니다.
+애니메이션 여부와 관련없이 모든 이모티콘 패키지에는 정지한 이모티콘 이미지가 존재합니다.</p>
 
-<aside class="notice">
-GIF 포맷 이미지는 투명한 색상이 흰색으로 표시됩니다.
-</aside>
+<p><code>https://emoticon.emoticbox.com/dist/{format}/size/static/{id}</code></p>
+<div class="highlight"><pre class="highlight html tab-html"><code><span class="nt">&lt;img</span> <span class="na">src=</span><span class="s">"https://emoticon.emoticbox.com/dist/webp/360/static/123456789"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;img</span> <span class="na">src=</span><span class="s">"https://emoticon.emoticbox.com/dist/png/240/static/123456789"</span><span class="nt">&gt;</span>
+</code></pre></div>
+<ul>
+<li>포맷: <code>webp</code>, <code>png</code></li>
+<li>크기: <code>320</code>(320px &times; 320px), <code>240</code>(240px &times; 240px), <code>160</code>(160px &times; 160px), <code>120</code>(120px &times; 120px), <code>80</code>(80px &times; 80px)</li>
+</ul>
+<h3 id='b575f71480'>일정 횟수만 재생되는 움직이는 이모티콘 이미지</h3>
+<p>일정 횟수만 재생되는 움직이는 이모티콘 이미지는 아래와 같이 URL을 구성하여 불러올 수 있습니다.
+재생 횟수는 크리에이터가 설정한 값을 따릅니다.
+애니메이션이 없는 이모티콘 패키지(<code>isAnimated</code>가 <code>false</code>인 경우)는 움직이는 이모티콘 이미지가 존재하지 않습니다.</p>
 
-<aside class="notice">
-당사는 WEBP 및 PNG의 애니메이션 재생이 불가능한 환경(Internet Explorer 등)에서의 호환성을 위하여 GIF 포맷 이미지를 제공합니다.
-GIF 포맷 이미지는 이미지의 품질이 낮고, 투명 색상이 흰색으로 표시되는 제약사항이 있습니다.
-당사는 다른 포맷의 사용이 불가능한 환경에서만 GIF 포맷을 사용하는 것을 권장합니다.
-</aside>
-<h1 id='api-rate-limit'>API Rate Limit</h1>
+<p><code>https://emoticon.emoticbox.com/dist/{format}/size/animated/{id}</code></p>
+<div class="highlight"><pre class="highlight html tab-html"><code><span class="nt">&lt;img</span> <span class="na">src=</span><span class="s">"https://emoticon.emoticbox.com/dist/webp/240/animated/123456789"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;img</span> <span class="na">src=</span><span class="s">"https://emoticon.emoticbox.com/dist/png/160/animated/123456789"</span><span class="nt">&gt;</span>
+</code></pre></div>
+<ul>
+<li>포맷: <code>webp</code>, <code>png</code></li>
+<li>크기: <code>320</code>(320px &times; 320px), <code>240</code>(240px &times; 240px), <code>160</code>(160px &times; 160px), <code>120</code>(120px &times; 120px), <code>80</code>(80px &times; 80px)</li>
+</ul>
+<h3 id='71cd98545f'>반복 재생되는 움직이는 이모티콘 이미지</h3>
+<p>반복 재생되는 이모티콘 이미지는 아래와 같이 URL을 구성하여 불러올 수 있습니다.
+애니메이션이 없는 이모티콘 패키지(<code>isAnimated</code>가 <code>false</code>인 경우)는 움직이는 이모티콘 이미지가 존재하지 않습니다.</p>
+
+<p><code>https://emoticon.emoticbox.com/dist/{format}/size/loop/{id}</code></p>
+<div class="highlight"><pre class="highlight html tab-html"><code><span class="nt">&lt;img</span> <span class="na">src=</span><span class="s">"https://emoticon.emoticbox.com/dist/webp/160/loop/123456789"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;img</span> <span class="na">src=</span><span class="s">"https://emoticon.emoticbox.com/dist/png/120/loop/123456789"</span><span class="nt">&gt;</span>
+</code></pre></div>
+<ul>
+<li>포맷: <code>webp</code>, <code>png</code></li>
+<li>크기: <code>320</code>(320px &times; 320px), <code>240</code>(240px &times; 240px), <code>160</code>(160px &times; 160px), <code>120</code>(120px &times; 120px), <code>80</code>(80px &times; 80px)</li>
+</ul>
+<h2 id='api-rate-limit-2'>API Rate Limit</h2>
 <p>TBD</p>
 <h1 id='errors'>Errors</h1>
 <p>아래는 일반적인 오류 상황에서 돌려받는 <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Status">HTTP 상태 코드</a>입니다.</p>
