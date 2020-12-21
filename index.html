@@ -340,6 +340,9 @@
               </ul>
           </li>
           <li>
+            <a href="#b6e4a393b2" class="toc-h1 toc-link" data-title="스토어 링크">스토어 링크</a>
+          </li>
+          <li>
             <a href="#errors" class="toc-h1 toc-link" data-title="Errors">Errors</a>
           </li>
       </ul>
@@ -851,7 +854,13 @@ API Key가 외부에 유출되었거나 유출되었다고 판단되는 경우 �
 </ul>
 <h2 id='api-rate-limit-2'>API Rate Limit</h2>
 <p>TBD</p>
-<h1 id='errors'>Errors</h1>
+<h1 id='b6e4a393b2'>스토어 링크</h1>
+<p>EmoticBox는 스토어 링크를 통해 접속한 사용자가 이모티콘 패키지를 구매하는 경우 매출의 일부를 고객사에 분배하고 있습니다.
+이를 위해서는 서비스 사용자가 EmoticBox 스토어 버튼을 눌렀을 때 아래 URL로 접속되도록 구현하시면 됩니다.</p>
+
+<p><code>https://emoticbox.com/deeplink/store?service_id={service_id}</code></p>
+<div class="highlight"><pre class="highlight html tab-html"><code><span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"https://emoticbox.com/deeplink/store?service_id=123456789"</span><span class="nt">&gt;</span>Go to EmoticBox Store<span class="nt">&lt;/a&gt;</span>
+</code></pre></div><h1 id='errors'>Errors</h1>
 <p>아래는 일반적인 오류 상황에서 돌려받는 <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Status">HTTP 상태 코드</a>입니다.</p>
 
 <table><thead>
