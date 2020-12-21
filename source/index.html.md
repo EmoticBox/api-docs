@@ -461,6 +461,17 @@ emoticon.order | integer | 이모티콘 번호(순서)
 
 TBD
 
+# 스토어 링크
+
+EmoticBox는 스토어 링크를 통해 접속한 사용자가 이모티콘 패키지를 구매하는 경우 매출의 일부를 고객사에 분배하고 있습니다.
+이를 위해서는 서비스 사용자가 EmoticBox 스토어 버튼을 눌렀을 때 아래 URL로 접속되도록 구현하시면 됩니다.
+
+`https://emoticbox.com/deeplink/store?service_id={service_id}`
+
+```html
+<a href="https://emoticbox.com/deeplink/store?service_id=123456789">Go to EmoticBox Store</a>
+```
+
 # Errors
 
 아래는 일반적인 오류 상황에서 돌려받는 [HTTP 상태 코드](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status)입니다.
