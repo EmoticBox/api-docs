@@ -472,6 +472,15 @@ EmoticBox는 스토어 링크를 통해 접속한 사용자가 이모티콘 패�
 <a href="https://emoticbox.com/deeplink/store?service_id=123456789">Go to EmoticBox Store</a>
 ```
 
+## EmoticBox 스토어 아이콘
+
+EmoticBox 스토어 아이콘은 [구글 드라이브](https://drive.google.com/drive/folders/1Z4AHwpy_EXd_Z0VDY5H2sOV_M_Qw2Cfd?usp=sharing)를 통해 다운로드할 수 있습니다.
+링크가 작동하지 않는다면 아래 주소로 직접 접속하시기 바랍니다.
+
+```
+https://drive.google.com/drive/folders/1Z4AHwpy_EXd_Z0VDY5H2sOV_M_Qw2Cfd?usp=sharing
+```
+
 # Errors
 
 아래는 일반적인 오류 상황에서 돌려받는 [HTTP 상태 코드](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status)입니다.
