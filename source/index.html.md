@@ -262,7 +262,7 @@ fetch(`${endpoint}/emoticon`, {
 
 #### HTTP Request
 
-`GET /emoticon`
+`GET /emoticon-api/v0/emoticon`
 
 ##### Header Parameters
 
@@ -340,7 +340,7 @@ fetch(`${endpoint}/emoticon/${emoticonId}`, {
 
 #### HTTP Request
 
-`GET /emoticon/:emoticonPackId`
+`GET /emoticon-api/v0/emoticon/:emoticonPackId`
 
 ##### Path Parameters
 
