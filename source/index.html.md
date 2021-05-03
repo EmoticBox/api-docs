@@ -2,8 +2,9 @@
 title: EmoticBox API
 
 language_tabs: # must be one of https://git.io/vQNgJ
-  - json
+  - html
   - javascript
+  - json
 
 toc_footers:
   - <a href='https://github.com/slatedocs/slate'>Documentation Powered by Slate</a>
@@ -33,22 +34,16 @@ Emoticon API를 사용하는 고객(사)를 의미합니다.
 
 고객(사) 서비스를 사용하는 사용자를 의미합니다.
 
-유의어: User
-
 ### 서비스
 
-Emoticon API를 사용하는 고객(사)의 서비스를 의미합니다.
-Emoticon API를 사용하기 위해서는 서비스를 등록하고 API 키를 발급받아야 합니다.
-
-유의어: Service
+EmoticBox API를 사용하는 고객(사)의 서비스를 의미합니다.
+EmoticBox API를 사용하기 위해서는 서비스를 등록하고 API 키를 발급받아야 합니다.
 
 ### 서비스 ID
 
 서비스를 구분하기 위한 UUID 형식의 고유값입니다.
 서비스 ID는 서비스 등록시 자동으로 생성되며 변경할 수 없습니다.
 서비스를 삭제하고 새로 등록하는 경우 새 서비스 ID가 생성되며 서로 다른 서비스로 간주됩니다.
-
-유의어: Service ID
 
 ### API 키
 
@@ -62,8 +57,6 @@ API Key는 외부에 공개되지 않아야 합니다.
 <aside class="notice">
 API Key가 외부에 유출되었거나 유출되었다고 판단되는 경우 즉시 <a href="mailto:tech@emoticbox.com">EmoticBox 기술지원(tech@emoticbox.com)</a>으로 문의해주시기 바랍니다.
 </aside>
-
-유의어: API Key
 
 ### 이모티콘
 
@@ -80,18 +73,23 @@ API Key가 외부에 유출되었거나 유출되었다고 판단되는 경우 �
 
 ### 사용 가능한 이모티콘 패키지
 
-사용자가 EmoticBox 회원인 경우 사용 가능한 이모티콘 패키지는 기본 제공 이모티콘 패키지는 사용자가 EmoticBox에서 구매한 이모티콘 패키지로 구성되며, 사용자가 EmoticBox 회원이 아닌 경우에는 기본 제공 이모티콘 패키지로만 구성됩니다.
+사용자가 EmoticBox 회원인 경우 사용 가능한 이모티콘 패키지는 기본 제공 이모티콘 패키지와 사용자가 EmoticBox에서 구매한 이모티콘 패키지로 구성되며, 사용자가 EmoticBox 회원이 아닌 경우에는 기본 제공 이모티콘 패키지로만 구성됩니다.
 
 ### 탭 이미지
 
 이모티콘 패키지의 대표 이미지로 사용자가 사용할 이모티콘 패키지를 선택할 때 표시됩니다.
+
+<img src="attachments/tabimage.png" alt="Tab Image">
+
+&#9651; 탭 이미지(박스 안)
 
 # 인증
 
 EmoticBox API를 사용하기 위해서는 서비스 ID와 API 키를 사용하여 엑세스 토큰을 발급받아야 합니다.
 아래 시퀀스 다이어그램은 인증 및 엑세스 토큰 절차를 보여줍니다.
 
-<img src="attachments/auth_sequence_diagram.png" alt="Service & User Authentication">
+<img src="attachments/d1.png" alt="Service & User Authentication">
+
 &#9651; 인증 및 엑세스 토큰 발급 절차(이미지를 새 탭에서 열면 크게 볼 수 있습니다)
 
 ## REST API
@@ -136,7 +134,7 @@ fetch(`${endpoint}/auth`, {
 }
 ```
 
-`POST /auth`
+`POST /api-auth/v0/auth`
 
 ##### Body Parameters
 
@@ -144,15 +142,16 @@ Parameter | Type | Required | Description
 --------- | ---- | -------- | -----------
 serviceId | string | true | 고객사 서비스 ID.
 apiKey | string | true | 고객사 서비스 API 키.
-userEmail | string | true | Access Token을 요청한 사용자의 이메일.
+userEmail | string | true | 고객사 서비스에서 Access Token을 요청한 사용자를 식별할 수 있는 값(최대 64문자).
 
-* `userEmail`은 사용자가 EmoticBox에서 고객사 서비스와 연동시 등록한 이메일과 일치해야 합니다.
+* `userEmail`은 한 서비스 내에서 고유한 값이어야 합니다(사용자 이메일, 아이디, PK, Hash 등).
+* 서비스 연동시 `userEmail` 값이 EmoticBox에 저장되며 이 값을 기반으로 연동 여부를 판단합니다.
 
 #### HTTP Response
 
 ```json
 {
-  "authToken": "authentication-token"
+  "authToken": {String}
 }
 ```
 
@@ -168,7 +167,7 @@ const endpoint = 'https://api.emoticbox.com/api-auth/v0';
 fetch(`${endpoint}/token`, {
   method: 'POST',
   body: {
-    authenticationToken: 'authentication-token',
+    authToken: 'authentication-token',
   },
 })
   .then((res) => {
@@ -188,11 +187,11 @@ fetch(`${endpoint}/token`, {
 
 #### HTTP Request
 
-`POST /token`
+`POST /api-auth/v0/token`
 
 ```json
 {
-  "authToken": "authentication-token"
+  "authToken": {String}
 }
 ```
 
@@ -200,19 +199,21 @@ fetch(`${endpoint}/token`, {
 
 Field | Type | Required | Description
 ------|------|----------|------------
-authToken | string | true | Authorize User API를 통해 발급받은 인증 토큰
+authToken | string | true | Authorize User API를 통해 발급받은 Authorization Token
 
 #### HTTP Response
 
 ```json
 {
-  "accessToken": "access-token"
+  "accessToken": {String},
+  "isGuest": {Boolean}
 }
 ```
 
 Field | Type | Description
 ----- | ---- | -----------
 accessToken | string | 엑세스 토큰
+isGuest | boolean | 연동 여부(연동되지 않은 사용자인 경우 `true`, 연동된 사용자인 경우 `false`)
 
 ## API Rate Limit
 
@@ -222,7 +223,8 @@ TBD
 
 아래 시퀀스 다이어그램은 이모티콘 패키지에 포함되어 있는 이모티콘을 불러와 전송하는 절차를 보여줍니다.
 
-<img src="attachments/sending_sequence_diagram.png" alt="Sending an Emoticon">
+<img src="attachments/d2.png" alt="Sending an Emoticon">
+
 &#9651; 이모티콘 전송 절차(이미지를 새 탭에서 열면 크게 볼 수 있습니다)
 
 ## REST API
@@ -233,7 +235,7 @@ TBD
 사용 가능한 이모티콘 패키지에는 아래 이모티콘 패키지가 포함됩니다.
 
 * 기본 제공되는 이모티콘 패키지
-* 사용자가 EmoticBox에서 구매한 이모티콘 패키지(사용자가 EmoticBox 회원인 경우)
+* 사용자가 EmoticBox에서 구매한 이모티콘 패키지(사용자가 서비스 연동 설정을 한 경우)
 
 ```javascript
 const endpoint = 'https://api.emoticbox.com/emoticon-api/v0';
@@ -266,38 +268,40 @@ fetch(`${endpoint}/emoticon`, {
 
 Field | Required | Description
 ------|----------|------------
-Authorization | true | Token Exchange API를 통해 발급받은 엑세스 토큰(`Bearer access-token`)
+Authorization | true | Token Exchange API를 통해 발급받은 엑세스 토큰(`Bearer example-access-token`)
 
 #### HTTP Response
 
 ```json
 {
-    "numEmoticonPacks": {Integer},
-    "emoticonPacks": [{
-      "id": {Integer},
-      "name": {String},
-      "isAnimated": {Boolean},
-      "tabImage": {
-        "color": {String},
-        "grayscale": {String},
-      }
-    },
-    {
-      "id": {Integer},
-      "name": {String},
-      "isAnimated": {Boolean},
-      "tabImage": {
-        "color": {String},
-        "grayscale": {String},
-      }
-    },
-    ...
-    ]
+  "isGuest": {Boolean},
+  "numEmoticonPacks": {Integer},
+  "emoticonPacks": [{
+    "id": {Integer},
+    "name": {String},
+    "isAnimated": {Boolean},
+    "tabImage": {
+      "color": {String},
+      "grayscale": {String},
+    }
+  },
+  {
+    "id": {Integer},
+    "name": {String},
+    "isAnimated": {Boolean},
+    "tabImage": {
+      "color": {String},
+      "grayscale": {String},
+    }
+  },
+  ...
+  ]
 }
 ```
 
 Field | Type | Description
 ----- | ---- | -----------
+isGuest | boolean | 연동 여부(연동되지 않은 사용자인 경우 `true`, 연동된 사용자인 경우 `false`)
 numEmoticonPacks | integer | 이모티콘 패키지의 개수
 emoticonPacks | emoticonPack[] | 이모티콘 패키지 리스트
 emoticonPack.id | string | 이모티콘 패키지의 ID
@@ -348,7 +352,7 @@ emoticonPackId | 정보를 요청할 이모티콘 패키지의 ID(UUID 형식)
 
 Field | Required | Description
 ------|----------|------------
-Authorization | true | Token Exchange API를 통해 발급받은 엑세스 토큰(`Bearer abcd...`)
+Authorization | true | Token Exchange API를 통해 발급받은 엑세스 토큰(`Bearer example-access-token`)
 
 #### HTTP Response
 
@@ -390,9 +394,9 @@ emoticon.order | integer | 이모티콘 번호(순서)
 
 ## 이모티콘 이미지 표시 방법
 
-<a href="./#list-emoticon-packages-api">List Emoticon Packages API</a>를 통해 얻을 수 있는 이모티콘 패키지 목록 또는 <a href="./#get-emoticon-package-api">Get Emoticon Package API</a>를 통해 얻을 수 있는 이모티콘 패키지 정보에는 해당 패키지의 탭 이미지 ID(UUID 형식)가 포함되어 있습니다.
+<a href="./#list-emoticon-packages">List Emoticon Packages API</a>를 통해 얻을 수 있는 이모티콘 패키지 목록 또는 <a href="./#get-emoticon-package">Get Emoticon Package API</a>를 통해 얻을 수 있는 이모티콘 패키지 정보에는 해당 패키지의 탭 이미지 ID(UUID 형식)가 포함되어 있습니다.
 
-<a href="./#get-emoticon-package-api">Get Emoticon Package API</a>를 통해 얻을 수 있는 이모티콘 패키지 정보에는 해당 패키지에 포함된 모든 이모티콘의 ID(UUID 형식)가 포함되어 있습니다.
+<a href="./#get-emoticon-package">Get Emoticon Package API</a>를 통해 얻을 수 있는 이모티콘 패키지 정보에는 해당 패키지에 포함된 모든 이모티콘의 ID(UUID 형식)가 포함되어 있습니다.
 하나의 이모티콘 패키지에는 16개, 24개, 32개 또는 40개의 이모티콘이 포함되어 있을 수 있습니다.
 
 이모티콘 패키지 파일에는 확장자가 없으며 각 파일 형식에 따라 적절한 `Content-Type` 헤더를 포함하여 응답합니다.
@@ -461,25 +465,50 @@ emoticon.order | integer | 이모티콘 번호(순서)
 
 TBD
 
+# 서비스 연동
+
+EmoticBox 사용자는 자신의 계정을 서비스와 연동 설정할 수 있습니다.
+사용자가 서비스와 연동할 수 있도록 하기 위해서는 사용자를 아래 URL로 이동시키거나, Deeplink를 통해 EmoticBox 애플리케이션을 실행하면 됩니다.
+
+<img src="attachments/d3.png" alt="Service Integration">
+&#9651; 서비스 연동 절차(이미지를 새 탭에서 열면 크게 볼 수 있습니다)
+
+사용자가 연동 설정하는 경우 <a href="./#authorize-user">Authorize User API</a> 호출시 설정한 `userEmail` 필드 값이 EmoticBox에 등록되어 EmoticBox 사용자를 식별할 수 있게 됩니다.
+`userEmail` 필드는 각 서비스별로 고유해야 합니다.
+
+### PC 웹
+
+```html
+<a href="https://emoticbox.com/deeplink/integration?token=example-access-token">서비스 연동하기</a>
+```
+
+`https://emoticbox.com/deeplink/integration?token={access_token}`
+
+### EmoticBox 애플리케이션
+
+```html
+<a href="EmoticboxStoreApp://?token=example-access-token">서비스 연동하기</a>
+```
+
+`EmoticboxStoreApp://?token={access_token}`
+
 # 스토어 링크
 
 EmoticBox는 스토어 링크를 통해 접속한 사용자가 이모티콘 패키지를 구매하는 경우 매출의 일부를 고객사에 분배하고 있습니다.
 이를 위해서는 서비스 사용자가 EmoticBox 스토어 버튼을 눌렀을 때 아래 URL로 접속되도록 구현하시면 됩니다.
 
-`https://emoticbox.com/deeplink/store?service_id={service_id}`
-
 ```html
-<a href="https://emoticbox.com/deeplink/store?service_id=123456789">Go to EmoticBox Store</a>
+<a href="https://emoticbox.com/deeplink/store?service_id=example-service-id">EmoticBox 스토어로 이동</a>
 ```
+
+`https://emoticbox.com/deeplink/store?service_id={service_id}`
 
 ## EmoticBox 스토어 아이콘
 
 EmoticBox 스토어 아이콘은 [구글 드라이브](https://drive.google.com/drive/folders/1Z4AHwpy_EXd_Z0VDY5H2sOV_M_Qw2Cfd?usp=sharing)를 통해 다운로드할 수 있습니다.
 링크가 작동하지 않는다면 아래 주소로 직접 접속하시기 바랍니다.
 
-```
-https://drive.google.com/drive/folders/1Z4AHwpy_EXd_Z0VDY5H2sOV_M_Qw2Cfd?usp=sharing
-```
+`https://drive.google.com/drive/folders/1Z4AHwpy_EXd_Z0VDY5H2sOV_M_Qw2Cfd?usp=sharing`
 
 # Errors
 
